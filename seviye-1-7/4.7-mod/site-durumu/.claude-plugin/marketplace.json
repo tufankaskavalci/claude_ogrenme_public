@@ -1,0 +1,5 @@
+{
+  "name": "site-durumu",
+  "owner": { "name": "ornek" },
+  "plugins": [{ "name": "site-durumu", "source": "./" }]
+}

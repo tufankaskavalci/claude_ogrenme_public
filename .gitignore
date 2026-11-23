@@ -1,0 +1,20 @@
+# Derleme artıkları
+bin/
+obj/
+node_modules/
+.vs/
+*.user
+
+# Sırlar: asla commit etme
+.env
+.env.*
+*.key
+*.pem
+secrets*
+appsettings.*.json
+
+# Çıktı dosyaları (terminalden Tee-Object ile alınanlar)
+*.log
+
+# Eval sonuçları (her çalıştırmada yeniden üretilir)
+eval-sonuc-*.json

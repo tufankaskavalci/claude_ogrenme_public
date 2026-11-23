@@ -1,0 +1,49 @@
+# PR açılınca Claude kodu inceler ve yorum yazar.
+# Yalnızca yorum yazar: dosya değiştirmez, onaylamaz, birleştirmez.
+# Gerekli secret: ANTHROPIC_API_KEY (Claude Console'dan alınan API anahtarı; kullanım API faturasına yazılır).
+name: Claude PR Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+# Aynı PR için üst üste çalışmasın (kullanım limitini korur).
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # Taslak PR'ları atla; taslaktan çıkınca ready_for_review ile çalışır.
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Yalnızca okuma ve yorum yazma. contents: read ile bu token kod yazamaz, birleştiremez.
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 1
+
+      # Action commit SHA'sına sabit (v1.0.267). Güncellemek için yeni SHA'yı bilerek seç.
+      - uses: anthropics/claude-code-action@4845bacbb38b3c4b15d948f035349786f678e068 # v1.0.267
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # GitHub App yerine workflow'un kendi token'ı: yetkiyi yukarıdaki permissions belirler.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Bu pull request'i incele. Önce depodaki CLAUDE.md dosyasını oku ve kurallarına göre değerlendir:
+            - Sayfa metni Türkçe ve hitap "siz" mi?
+            - Köşeli parantezli yer tutucular ([...]) uydurma bilgiyle doldurulmuş mu?
+            - Koyu mod iki yerde (media query ve data-theme) birlikte değişmiş mi?
+            - Erişilebilirlik, bozuk bağlantı, yazım hatası var mı?
+            Sorunları ilgili satıra satır içi yorum olarak yaz. Sonunda tek bir özet yorum bırak.
+            Sorun yoksa bunu kısaca söyle. Yorumları Türkçe yaz.
+            Dosya değiştirme, onaylama, birleştirme ya da PR'ı kapatma.
+          claude_args: |
+            --model claude-sonnet-5-5
+            --max-turns 15
+            --allowedTools "Read,Grep,Glob,Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr comment:*),mcp__github_inline_comment__create_inline_comment"
+            --disallowedTools "Edit,Write,MultiEdit,Bash(git push:*),Bash(git commit:*),Bash(gh pr merge:*),Bash(gh pr review:*),Bash(gh pr close:*)"

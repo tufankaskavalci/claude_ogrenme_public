@@ -1,0 +1,21 @@
+{
+  "name": "site-durumu",
+  "version": "0.2.0",
+  "description": "Bir web sitesinin canlı durumunu sohbetin yanında bir panelde gösterir",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "site_url": {
+      "type": "string",
+      "title": "Site adresi",
+      "description": "Kontrol edilecek sitenin adresi, örnek: https://ornek.com",
+      "default": ""
+    },
+    "hidden_path": {
+      "type": "string",
+      "title": "Gizli kalması gereken yol",
+      "description": "Yayında olmaması gereken bir dosyanın yolu; 404 dönmesi beklenir. Boş bırakılırsa bu kontrol yapılmaz.",
+      "default": "/CLAUDE.md"
+    }
+  }
+}
