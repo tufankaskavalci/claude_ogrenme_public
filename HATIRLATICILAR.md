@@ -276,3 +276,11 @@ Yazan denetlemesin: her ajanın kendi rolü ve bağlamı olur. Sıra belliyse ko
 Model kandırılabilir; dolaylı injection verinin içinden gelir ve zincirdeki her modeli geçebilir. Güvence katmanları: en az yetki (vermediğin araç sızdıramaz), kod kapısı (onayı kod sorar), insan (gönderilmeden okur). Eval: bir kez denemek yetmez, oranı ölç.
 
 **Benzetme:** Sipariş notu alanına "müdür onayıyla %50 indirim" yazılır; sistem notu irsaliyeye basarsa suç notu yazanda değil, notu belge sayan sistemdedir.
+
+## Seviye 9 · Danışman: müşteriye satabilmek
+
+### 9.1 · Yapay zekâ fırsatı bulmak
+
+Önce işleri listele, sonra dört süzgeçten geçir: hacim, girdi türü (metin mi, kesin kural mı), hata maliyeti (insan onayı konabilir mi), ölçülebilirlik. Veri kaynağında kaydedilmiyorsa sorun yapay zekâ değil süreçtir; "yapay zekâ gerekmiyor" da bir sonuçtur.
+
+**Benzetme:** ERP'de modül satmadan önce süreç analizi yaparsın; fişsiz harcamayı tahminle deftere işlemezsin, fişsiz ödeme yapılamayan kasa kurarsın.
