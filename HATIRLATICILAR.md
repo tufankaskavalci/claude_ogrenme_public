@@ -284,3 +284,9 @@ Model kandırılabilir; dolaylı injection verinin içinden gelir ve zincirdeki 
 Önce işleri listele, sonra dört süzgeçten geçir: hacim, girdi türü (metin mi, kesin kural mı), hata maliyeti (insan onayı konabilir mi), ölçülebilirlik. Veri kaynağında kaydedilmiyorsa sorun yapay zekâ değil süreçtir; "yapay zekâ gerekmiyor" da bir sonuçtur.
 
 **Benzetme:** ERP'de modül satmadan önce süreç analizi yaparsın; fişsiz harcamayı tahminle deftere işlemezsin, fişsiz ödeme yapılamayan kasa kurarsın.
+
+### 9.2 · Fiyat, risk, KVKK
+
+Teklifin dört bölümü: kapsam (yapmaz listesi dahil), fiyat (emek ve değer; token "şu tavana kadar dahil"), risk (modele değil mimariye güven), ölçüm (önce/sonra). Kişisel veri sorununu mimari küçültür: modele şema gider, sorgu içeride çalışır, kimlik içerideki eşleştirme tablosunda kalır; takma adlı veri yine de kişisel veridir.
+
+**Benzetme:** Dış danışmana canlı veritabanının yedeğini vermezsin, şemayı verirsin; sorguyu o yazar, sen içeride çalıştırırsın. Token, eski tekliflerdeki barındırma gideri satırıdır.

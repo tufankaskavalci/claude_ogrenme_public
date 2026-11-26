@@ -39,9 +39,38 @@ Dört süzgeçten geçen iş iyi bir fırsattır. Birinde takılırsa çözüm b
 
 ## 9.2 Fiyat, risk, KVKK, veri gizliliği
 
-Bir yapay zekâ işinin maliyetini, risklerini ve kişisel veri yükümlülüklerini müşteriye açıkça anlatabilmek. Alıştırma: bir teklif taslağı.
+**Kavram:** Bir yapay zekâ teklifinin üç ayağı vardır:
 
-*Yakında.*
+| Ayak | Özü |
+|---|---|
+| Fiyat | Token çoğu zaman en küçük kalemdir (ör. günde 200 soru, orta sınıf bir modelle ayda onlarca dolar). Fiyat emek ve müşteriye sağlanan değer üzerinden kurulur; token "şu tavana kadar dahil, aşım maliyetine" diye şeffaf yazılır. |
+| Risk | Modele değil mimariye güven: salt okunur veritabanı kullanıcısı, yetkinin veritabanı görünümünde (view) çözülmesi, raporun altında çalışan sorgunun görünmesi, gerçek sorulardan oluşan bir eval seti, serbest metin alanlarından gelebilecek dolaylı injection'a karşı önlem (8.7). |
+| Veri | Çalışan ve müşteri verisi kişisel veridir. Müşteri veri sorumlusu, sen veri işleyensin. Veriyi bir bulut modeline göndermek çoğu zaman yurt dışına aktarımdır; bunun hukuka uygunluğunu müşterinin hukukçusu teyit eder, sen değil. |
+
+**Örnek (İK'ya doğal dilde rapor asistanı, 9.1'deki fırsat):**
+
+| Bölüm | İçerik |
+|---|---|
+| Kapsam: yapar | Soruyu rapora çevirir; yalnız okur; herkes kendi biriminin verisini görür; raporun altında sorgu görünür |
+| Kapsam: yapmaz | Veri değiştirmez; karar vermez; resmî rapor ya da bordro üretmez; kişi hakkında yorum yapmaz |
+| Fiyat | Kurulum = adam-gün × günlük ücret. Aylık = birkaç adam-gün bakım + token (tavanlı) |
+| Risk 1: yanlış rapor | Sorgu görünür, eval seti, ilk aylarda kritik raporları bir uzman teyit eder |
+| Risk 2: veri sızıntısı | Yetki modelde değil veritabanında; modele kimlik bilgisi gitmez |
+| Ölçüm | Bir raporun hazırlanma süresi (önce/sonra), kullanım sayısı, eval doğruluğu |
+
+"Yapmaz" listesi en az "yapar" listesi kadar önemlidir. "Önce" ölçümü işe başlamadan alınır; yoksa üç ay sonra kıyaslayacak bir şey kalmaz.
+
+**Alıştırma:** 9.1'de seçtiğin fırsat için dört başlıklı bir teklif iskeleti yaz:
+1. Kapsam: ne yapacak, ne yapmayacak?
+2. Fiyat: kurulum ve aylık hizmet için kendi piyasana göre birer rakam; token'ı teklifte nasıl göstereceksin?
+3. Müşteri için en önemli iki risk ve önlemleri.
+4. Üç ay sonra "işe yaradı" demek için ne ölçülecek?
+
+**Geçti ölçütü:** Müşterinin hukukçusu "çalışan verisi yurt dışına çıkamaz" dedi. Projeyi iptal etmeden mimariyi nasıl değiştirirsin? (Beklenen yön: kimlik bilgisi içeride kalır, modele takma ID gider ve gösterim sırasında içeride ada çevrilir; daha iyisi modele yalnız tablo şeması gider, sorgu içeride çalışır, modele en fazla toplu sonuç döner.)
+
+**Benzetme:** Dış danışmana canlı veritabanının yedeğini vermezsin; tablo şemasını verirsin, sorguyu o yazar, sen içeride çalıştırırsın. Token ise eski tekliflerdeki "barındırma gideri" satırıdır.
+
+**Sık hata:** Takma adlandırılmış veriyi "anonim" sanmak. Eşleştirme tablosu sende olduğu sürece veri hâlâ kişisel veridir; risk küçülür, yükümlülük kalkmaz. Bir diğeri: teklifi token maliyeti üzerinden fiyatlamak; müşteri token değil, kazandığı zamanı satın alır.
 
 ## 9.3 Demo ve teslim
 
