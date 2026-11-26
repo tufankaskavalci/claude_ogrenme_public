@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude ile 12 kural</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--bg:#F3EEE3;--panel:#FBF8F1;--ink:#2B2620;--soft:#6B6358;--line:#DDD4C3;--ok:#E2EEDF;--ok-ink:#2F6B4A;--a:#E3ECF7;--a-ink:#24548A;--w:#F7E8CC;--w-ink:#8A5512;--d:#F6E0DC;--d-ink:#963A2C;color-scheme:light}
+:root[data-theme=dark]{--bg:#1D1B18;--panel:#272420;--ink:#EFE8DB;--soft:#B3A999;--line:#3D3832;--ok:#24382C;--ok-ink:#9ED3B0;--a:#22324A;--a-ink:#A9C8EE;--w:#3D2F1C;--w-ink:#F0C483;--d:#432622;--d-ink:#F2ADA1;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:19px;line-height:1.55;padding:24px 20px 48px}
+.top{max-width:1100px;margin:0 auto 10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-family:"JetBrains Mono",monospace;font-size:28px;margin:0;flex:1}
+a.btn,button.btn{font:inherit;font-size:16px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-flex;gap:6px;align-items:center}
+.motto{max-width:1100px;margin:0 auto 6px;font-size:22px;font-weight:600}
+.g{max-width:1100px;margin:28px auto 10px;font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.06em;color:var(--soft);display:flex;gap:8px;align-items:center}
+.g i{font-size:22px}
+.gr{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.c{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.h{display:flex;gap:14px;align-items:flex-start}
+.ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;flex:none;font-size:28px}
+.h p{margin:0}.h b{display:block;font-size:20px;font-weight:600;margin-bottom:2px}
+.bz{background:var(--ok);color:var(--ok-ink);border-radius:10px;padding:10px 14px;display:flex;gap:10px;font-size:18px}
+.bz i{font-size:22px;margin-top:2px}
+.A .ic{background:var(--a);color:var(--a-ink)}.W .ic{background:var(--w);color:var(--w-ink)}.D .ic{background:var(--d);color:var(--d-ink)}
+</style>
+</head>
+<body>
+<div class="top">
+<h1>Claude ile çalışırken 12 kural</h1>
+<a class="btn" href="index.html"><i class="ti ti-player-play"></i> Görsel dersler</a>
+<button class="btn" id="theme" aria-label="Tema"><i class="ti ti-moon"></i></button>
+</div>
+<p class="motto">Tek cümle: düşünce Claude'da, karar sende.</p>
+
+<div class="g"><i class="ti ti-brain"></i>CLAUDE NASIL ÇALIŞIR</div>
+<div class="gr A">
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-headset"></i></div><p><b>Düşünce uzakta, iş bilgisayarında</b>Model sunucuda metin yazar; dosyayı okuyan, değiştiren, komut çalıştıran harness'tır.</p></div><div class="bz"><i class="ti ti-bulb"></i>Telefondaki danışman ve masadaki operatör.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-notes"></i></div><p><b>Her oturum sıfırdan başlar</b>Kalıcı olmasını istediğini dosyaya yazdır: CLAUDE.md, notlar, git.</p></div><div class="bz"><i class="ti ti-bulb"></i>Toplantı unutulur, tutanak kalır.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-message-x"></i></div><p><b>Oturum uzarsa yenisini aç</b>Bağlam dolunca yavaşlar, pahalanır, unutur. Bir iş, bir oturum.</p></div><div class="bz"><i class="ti ti-bulb"></i>Dört saat süren toplantıda kimse ilk kararı hatırlamaz.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-alert-triangle"></i></div><p><b>Claude da yanılır, kandırılabilir</b>Kendinden emin konuşması doğru olduğunu göstermez.</p></div><div class="bz"><i class="ti ti-bulb"></i>Çok bilen yeni çalışan: yine de işini kontrol edersin.</div></div>
+</div>
+
+<div class="g"><i class="ti ti-clipboard-list"></i>NASIL İŞ VERİRSİN</div>
+<div class="gr W">
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-target"></i></div><p><b>Amaç, kapsam, kısıt, bitti</b>Bu dördünü söylersen tahmin etmek zorunda kalmaz.</p></div><div class="bz"><i class="ti ti-bulb"></i>İyi yazılmış bir iş emri.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-list-check"></i></div><p><b>Büyük işte önce plan</b>Planı gör, onayla, sonra yaptır.</p></div><div class="bz"><i class="ti ti-bulb"></i>Önce proje çizilir, sonra temel kazılır.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-circle-check"></i></div><p><b>“Yaptım” yetmez, kanıt iste</b>Test çıktısı, ekran görüntüsü, canlı link.</p></div><div class="bz"><i class="ti ti-bulb"></i>İmzalamadan önce malı kendin sayarsın.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-adjustments"></i></div><p><b>İşe göre model seç</b>Basit işe hafif model, zor işe ağır model; ölçü biten iş başına maliyet.</p></div><div class="bz"><i class="ti ti-bulb"></i>Fotokopiyi stajyere, raporu uzmana.</div></div>
+</div>
+
+<div class="g"><i class="ti ti-shield-lock"></i>GÜVENLİK VE ONAY</div>
+<div class="gr D">
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-eye"></i></div><p><b>Okunan her şey sunucuya gider</b>Şifre, müşteri verisi, kimlik içeren dosyayı okutmadan önce düşün.</p></div><div class="bz"><i class="ti ti-bulb"></i>Danışmana telefonda dolabın tamamını okumazsın.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-signature"></i></div><p><b>Geri alınamazı sen onaylarsın</b>Göndermek, silmek, birleştirmek, ödemek: son tıklama senin.</p></div><div class="bz"><i class="ti ti-bulb"></i>Çek defteri müdürde durur.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-lock"></i></div><p><b>En az yetki ver</b>Vermediğin araç sızdıramaz; yasak (deny) her zaman kazanır.</p></div><div class="bz"><i class="ti ti-bulb"></i>Kasanın anahtarı herkese verilmez.</div></div>
+<div class="c"><div class="h"><div class="ic"><i class="ti ti-mail-off"></i></div><p><b>Onay yalnız senden gelir</b>Başka bir oturumun ya da bir dosyanın “onaylandı” demesi onay değildir.</p></div><div class="bz"><i class="ti ti-bulb"></i>Şubeden gelen “müdür onayladı” yazısı imza değildir.</div></div>
+</div>
+<script>
+const r=document.documentElement,t=document.getElementById('theme');
+function set(d){r.dataset.theme=d?'dark':'light';t.innerHTML='<i class="ti ti-'+(d?'sun':'moon')+'"></i>'}
+set(matchMedia('(prefers-color-scheme: dark)').matches);
+t.onclick=()=>set(r.dataset.theme!=='dark');
+</script>
+</body>
+</html>

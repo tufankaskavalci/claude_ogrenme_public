@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Ustalık · Görsel dersler</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--bg:#F3EEE3;--panel:#FBF8F1;--ink:#2B2620;--soft:#6B6358;--line:#DDD4C3;--ac:#3E7B5B;--ac-bg:#E2EEDF;--idea:#ECE6F6;--idea-ink:#4A3D7A;--warm:#F5E3CC;--warm-ink:#8A4E14;--pk2:#B8642A;color-scheme:light}
+:root[data-theme=dark]{--bg:#1D1B18;--panel:#272420;--ink:#EFE8DB;--soft:#B3A999;--line:#3D3832;--ac:#7FC29B;--ac-bg:#26382D;--idea:#2E2840;--idea-ink:#CFC3F2;--warm:#3D2E1E;--warm-ink:#F0C08A;--pk2:#E79A5E;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:19px;line-height:1.6}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+.logo i{font-size:26px;color:var(--ac)}
+.sp{flex:1}
+.btn{font:inherit;font-size:16px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn:hover{border-color:var(--soft)}
+.btn.main{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+:root[data-theme=dark] .btn.main{color:#13201A}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr)}
+nav{border-right:1px solid var(--line);padding:16px 10px;min-height:calc(100vh - 64px)}
+nav .lv{width:100%;text-align:left;border:0;background:none;color:var(--ink);font:inherit;font-size:17px;padding:9px 12px;border-radius:10px;cursor:pointer;display:flex;gap:10px;align-items:center}
+nav .lv:hover{background:var(--line)}
+nav .lv.on{background:var(--ac-bg);color:var(--ac);font-weight:600}
+nav .k{font-family:"JetBrains Mono",monospace;width:26px;height:26px;border-radius:7px;border:1px solid currentColor;display:grid;place-items:center;font-size:14px;flex:none}
+main{padding:20px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-content:start}
+.crumb{grid-column:1/-1}
+.crumb small{color:var(--soft);font-size:15px}
+.crumb h1{margin:2px 0 0;font-size:30px;line-height:1.25}
+.crumb p{margin:4px 0 0;color:var(--soft)}
+.left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.mets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.met{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.met small{display:block;font-size:13px;color:var(--soft);font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.04em}
+.met b{font-size:21px;font-weight:600;display:block;transition:color .4s}
+.met b.new{color:var(--ac);animation:bump .5s}
+@keyframes bump{0%{transform:scale(1.25)}100%{transform:none}}
+.stage{--hw:min(66px,11.5%);background:var(--panel);border:1px solid var(--line);border-radius:16px;position:relative;height:380px;overflow:hidden}
+.stage .dg{position:absolute;inset:0;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px;opacity:.7}
+.shd{position:absolute;left:16px;top:12px;font-size:13px;letter-spacing:.06em;color:var(--soft);display:flex;gap:6px;align-items:center;z-index:2}
+.shd i{font-size:17px}
+svg.ln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+svg.ln line{stroke:var(--line);stroke-width:3;stroke-dasharray:6 6;transition:opacity .5s}
+.nd{position:absolute;width:min(132px,23%);transform:translate(-50%,-50%) scale(.85);opacity:0;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;transition:all .5s;z-index:1}
+.nd i{font-size:34px;display:block;color:var(--soft);transition:color .4s}
+.nd b{font-size:15px;line-height:1.25;display:block;font-weight:500}
+.nd.vis{opacity:.45;transform:translate(-50%,-50%)}
+.nd.on{opacity:1;border-color:var(--ac);box-shadow:0 0 0 4px var(--ac-bg)}
+.nd.on i{color:var(--ac)}
+.pk{position:absolute;z-index:3;transform:translate(-50%,-50%);background:var(--ac);color:#fff;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis;opacity:0;pointer-events:none}
+:root[data-theme=dark] .pk{color:#13201A}
+.pk.go{animation:none}
+.flow{position:absolute;inset:44px 16px 16px;display:grid;grid-template-columns:1fr 54px 1fr 54px 1fr;align-items:center}
+.fn{background:var(--warm);border:1.5px solid var(--warm-ink);border-radius:16px;padding:16px 6px;text-align:center;opacity:0;transform:translateY(14px) scale(.9);animation:pop .5s forwards}
+.fn i{font-size:42px;display:block;color:var(--warm-ink)}
+.fn b{font-size:16px;line-height:1.25;display:block;color:var(--warm-ink);font-weight:600}
+.fl{position:relative;height:4px;margin:0 4px;background:var(--line);border-radius:2px;opacity:0;animation:fade .3s forwards}
+.fl::after{content:"";position:absolute;top:-6px;left:0;width:16px;height:16px;border-radius:50%;background:var(--pk2);animation:pkt 1.6s ease-in-out infinite;animation-delay:inherit}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes pkt{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 16px);opacity:0}}
+.flip{animation:flip .5s}
+@keyframes flip{from{opacity:0;transform:rotateY(60deg)}to{opacity:1;transform:none}}
+.side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.card .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--soft)}
+.pill{font-size:13px;padding:3px 10px;border-radius:999px;background:var(--ac-bg);color:var(--ac);font-weight:600}
+.pill.w{background:var(--warm);color:var(--warm-ink)}
+.card h2{margin:6px 0 8px;font-size:23px;line-height:1.3}
+.card p{margin:0 0 12px}
+.idea{background:var(--idea);color:var(--idea-ink);border-radius:12px;padding:12px 16px;display:flex;gap:12px}
+.idea i{font-size:26px}
+.idea small{display:block;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.06em;opacity:.85}
+.ctrl{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.sdots{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.sdots span{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;color:var(--soft);font-family:"JetBrains Mono",monospace;cursor:pointer}
+.sdots span.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.sdots span.dn{background:var(--ac-bg);color:var(--ac);border-color:var(--ac)}
+.sdots span.w.on{background:var(--warm-ink);border-color:var(--warm-ink)}
+.ldots{grid-column:1/-1;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.ldots .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.ld{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:6px 12px;font:inherit;font-size:15px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.ld .n{font-family:"JetBrains Mono",monospace;color:var(--soft)}
+.ld.on{border-color:var(--ac);background:var(--ac-bg);color:var(--ac);font-weight:600}
+.hint{font-size:14px;color:var(--soft);margin-top:10px}
+kbd{font-family:"JetBrains Mono",monospace;font-size:12px;border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--bg)}
+@media(max-width:980px){.wrap{grid-template-columns:1fr}nav{display:flex;overflow-x:auto;min-height:0;border-right:0;border-bottom:1px solid var(--line);padding:8px}nav .lv{width:auto;white-space:nowrap}nav .lv .t{display:none}main{grid-template-columns:1fr;padding:14px}.stage{height:340px}.nd{padding:8px 3px}.nd b{font-size:12px!important;overflow-wrap:anywhere}.nd i{font-size:26px}.nd b{font-size:13px}.flow{grid-template-columns:1fr;gap:4px;inset:40px 30px 10px}.fl{width:4px;height:20px;margin:0 auto}.fl::after{display:none}.fn{padding:8px}.fn i{font-size:26px}.crumb h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo mono"><i class="ti ti-route"></i>Claude Ustalık</div>
+  <span class="btn mono" style="cursor:default">46 ders · görsel tekrar</span>
+  <div class="sp"></div>
+  <a class="btn" href="kurallar.html"><i class="ti ti-list-check"></i> 12 kural</a>
+  <a class="btn" href="tekrar.html"><i class="ti ti-bolt"></i> Hızlı tekrar</a>
+  <button class="btn" id="theme" aria-label="Tema"><i class="ti ti-moon"></i></button>
+</header>
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main>
+    <div class="crumb"><small class="mono" id="where"></small><h1 class="mono" id="title"></h1><p id="oz"></p></div>
+    <div class="left">
+      <div class="mets" id="mets"></div>
+      <section class="stage" id="stage"><div class="dg"></div><div class="shd mono" id="shd"></div><svg class="ln" id="ln"></svg><div id="nodes"></div><div class="pk" id="pk"></div></section>
+    </div>
+    <div class="side">
+      <div class="card">
+        <div class="top"><span class="mono" id="sno"></span><span class="pill" id="pill"></span></div>
+        <h2 id="sh"></h2>
+        <p id="stx"></p>
+        <div class="idea"><i class="ti ti-bulb"></i><div><small>BENZETME</small><span id="bz"></span></div></div>
+        <div class="ctrl"><button class="btn" id="back"><i class="ti ti-arrow-left"></i> Geri</button><button class="btn main" id="fwd"></button></div>
+        <div class="sdots" id="sdots"></div>
+      </div>
+      <div class="card"><div class="top"><span class="mono">SEVİYENİN ÖZÜ</span></div><p id="lsum" style="margin:6px 0 0;font-size:20px;font-weight:500"></p></div>
+    </div>
+    <div class="ldots"><div class="mono" style="font-size:13px;color:var(--soft)">BU SEVİYEDEKİ DERSLER</div><div class="row" id="ldots"></div><div class="hint"><kbd>←</kbd> <kbd>→</kbd> tuşlarıyla da ilerleyebilirsin</div></div>
+  </main>
+</div>
+<script>window.DERS=[];</script>
+<script>
+DERS.push(
+{n:"1.1",t:"Oturum ve araçlar",oz:"Claude bir klasörde açılır ve o klasörde araçlarla çalışır.",bz:"Yeni çalışana bir ofis ve bir alet çantası verirsin; ofisin dışına kendiliğinden çıkmaz.",
+N:"y:user:Sen:12:50|h:headset:Claude Code:42:50|k:folder:Klasör:78:22|a:tool:Araçlar:78:78",
+S:[["y,h","y>h:“Şu dosyayı düzelt”","","Claude Code'u bir klasörde açarsın ve isteğini yazarsın.","İsteğini yazarsın"],
+["h,k","","","Claude yalnız o klasörde çalışır; dışına kendiliğinden çıkmaz.","Çalışma alanı: klasör"],
+["h,a","h>a:Read · Edit · Grep · Bash","","İşi araçlarla yapar: Read okur, Edit değiştirir, Grep arar, Bash komut çalıştırır.","Alet çantası"],
+["a,k","a>k:değişiklik","","Araçlar klasördeki dosyalara dokunur; sonuç diskte durur.","Sonuç diskte"]],
+W:"briefcase:Ofis|tools:Alet çantası|checks:İş biter"},
+
+{n:"1.2",t:"İzin modları",oz:"Mod, Claude'un ne kadar sormadan çalışacağını belirler.",bz:"Stajyere ilk hafta her işi sorarak yaptırırsın, güvendiğin kıdemliye “sen hallet” dersin.",
+N:"y:user:Sen:12:50|c:robot:Claude:45:50|m:shield-lock:İzin modu:45:16|d:file:Dosya, komut:82:50",
+S:[["c,d","","","Claude bir dosyayı değiştirmek ya da komut çalıştırmak istiyor.","Claude bir iş yapacak"],
+["m,c","","","Ne olacağını izin modu belirler: sor, düzenlemeleri kabul et, plan, otomatik.","Mod karar verir"],
+["y,c","c>y:“İzin var mı?”","","“Sor” modunda her işte sana sorar. Müşteride ve canlı sistemde böyle çalış.","Sor modu"],
+["c,d","c>d:sormadan yapar","","Kendi deneme klasöründe otomatik moda alırsın; sormadan yapar.","Otomatik mod"]],
+W:"school:Stajyer|user-question:Sorarak çalışır|user-check:Kıdemli halleder"},
+
+{n:"1.3",t:"Bağlam",oz:"Bağlam oturumun geçici hafızasıdır; oturum kapanınca gider.",bz:"Toplantıda konuşulan akılda kalır ama yazılmazsa ertesi gün unutulur; kalıcı olan tutanaktır.",
+N:"y:user:Sen:12:35|b:brain:Bağlam:45:35|x:door-exit:Oturum kapandı:45:82|f:file-text:Dosya, CLAUDE.md:82:35",
+S:[["y,b","y>b:konuşma","","Konuştuğun her şey oturumun bağlamında, yani geçici hafızasında durur.","Geçici hafıza"],
+["b,x","","","Oturum kapanınca bağlam silinir; yeni oturum hiçbir şey hatırlamaz.","Oturum kapanınca"],
+["b,f","b>f:“bunu kaydet”","","Kalıcı olsun istediğini dosyaya yazdırırsın: CLAUDE.md, notlar, git.","Kalıcı olan dosyada"],
+["f,b","f>b:okunur","","Yeni oturum dosyayı okur ve kaldığı yerden devam eder.","Ertesi gün"]],
+W:"users:Toplantı|mood-empty:Unutulur|notes:Tutanak kalır"},
+
+{n:"1.4",t:"CLAUDE.md",oz:"Projenin kalıcı talimatı: bir kez yazarsın, her oturum açılırken okunur.",bz:"İşe yeni giren herkesin ilk gün okuduğu şirket el kitabı.",
+N:"f:file-text:CLAUDE.md:15:50|o:robot:Bugünkü oturum:62:22|t:robot:Yarınki oturum:62:78|r:checks:Aynı kurallar:88:50",
+S:[["f","","","Projenin kurallarını bir kez CLAUDE.md dosyasına yazarsın.","Bir kez yaz"],
+["f,o","f>o:kurallar","","Her oturum açılırken bu dosyayı kendiliğinden okur.","Her açılışta okunur"],
+["f,t","f>t:kurallar","","Yarın açılan oturum da aynı kuralları bilir; tekrar anlatmazsın.","Tekrar anlatmazsın"]],
+W:"book:El kitabı|user-plus:Yeni çalışan okur|building:Kurala göre çalışır"},
+
+{n:"2.1",t:"İyi istek",oz:"İyi istek dört şey söyler: amaç, kapsam, kısıt ve bitti ölçütü.",bz:"İyi bir iş emri: ne yapılacak, nereye kadar, neye dokunulmayacak, ne zaman bitmiş sayılır.",
+N:"y:user:Sen:12:50|i:clipboard-list:İstek:45:50|c:robot:Claude:82:50",M:"Amaç|Kapsam, kısıt|Bitti ölçütü",
+S:[["y,i","","?|?|?","“Siteyi düzelt” yetersiz bir istek: Claude neyi, nereye kadar yapacağını tahmin etmek zorunda.","Eksik istek"],
+["y,i","","✓|?|?","Amaç: neden istiyorsun? “Müşteri iletişim formunu bulamıyor.”","Amaç"],
+["y,i","","✓|✓|?","Kapsam ve kısıt: “Yalnız ana sayfa; tasarıma dokunma.”","Kapsam ve kısıt"],
+["i,c","i>c:net iş emri","✓|✓|✓","Bitti ölçütü: “Telefonda formu bulup gönderebiliyorsam bitti.” Artık tahmin yok.","Bitti ölçütü"]],
+W:"clipboard-list:Ne yapılacak|ban:Neye dokunulmaz|calendar-check:Ne zaman biter"},
+
+{n:"2.2",t:"Plan modu",oz:"Büyük işte önce planı gör ve onayla, sonra yaptır.",bz:"Müteahhide önce projeyi çizdirirsin, onaylarsın, sonra temeli kazdırırsın.",
+N:"y:user:Sen:12:50|c:robot:Claude:45:62|p:list-check:Plan:45:18|k:code:Kod:82:62",
+S:[["y,c","y>c:büyük iş","","Büyük bir iş verirsin ve plan modunu açarsın.","Plan modu açık"],
+["c,p","c>p:plan yazar","","Claude önce dosyaları okur ve ne yapacağını yazar; hiçbir şeyi değiştirmez.","Önce plan"],
+["y,p","p>y:onaylıyor musun?","","Planı okursun; yanlışsa daha kod yazılmadan düzeltirsin.","Sen onaylarsın"],
+["c,k","c>k:uygular","","Onaydan sonra uygular.","Sonra iş"]],
+W:"pencil:Proje çizimi|signature:Onay|shovel:Temel kazılır"},
+
+{n:"2.3",t:"Görsel, dosya, link",oz:"Bin kelime yerine bir ekran görüntüsü: göster, Claude uyarlasın.",bz:"Ustaya “şuna benzesin” diye fotoğraf göstermek, yarım saat tarif etmekten iyidir.",
+N:"y:user:Sen:10:50|g:photo:Ekran görüntüsü:37:50|c:robot:Claude:63:50|r:palette:Benzer tasarım:90:50",
+S:[["y,g","","","Uzun tarif yerine beğendiğin ekranın görüntüsünü alırsın.","Tarif etme, göster"],
+["g,c","g>c:görsel","","Görseli sohbete eklersin; Claude görüntüyü okur. Dosya ve link de aynı şekilde verilir.","Claude bakar"],
+["c,r","c>r:uyarlar","","Gördüğünü kendi projene uyarlar.","Benzerini yapar"]],
+W:"camera:Fotoğraf|hammer:Usta bakar|armchair:Aynısını yapar"},
+
+{n:"2.4",t:"Doğrulama",oz:"“Yaptım” yetmez, kanıt iste; ikinizin de bakması en güzeli.",bz:"Teslim tutanağını imzalamadan önce malı kendi gözünle sayarsın.",
+N:"c:robot:Claude:15:50|d:circle-check:“Yaptım”:48:22|k:file-search:Kanıt:48:78|y:user:Sen:85:50",
+S:[["c,d","d>y:“Yaptım”","","Claude işin bittiğini söyler. Bu bir iddiadır, kanıt değil.","İddia"],
+["y,c","y>c:“Göster”","","Kanıt istersin: test çıktısı, ekran görüntüsü, canlı link.","Kanıt iste"],
+["c,k","k>y:kanıt","","Kanıtı ikiniz de görürsünüz; sonra onaylarsın.","Sonra imza"]],
+W:"truck:Mal geldi|list-numbers:Kendin say|signature:İmza"},
+
+{n:"2.5",t:"Hata ve geri alma",oz:"Commit edilmemişi restore iz bırakmadan siler; commit edilmişi revert yeni bir kayıtla geri alır.",bz:"Kaydedilmemiş fişi silmek iz bırakmaz; kesilmiş faturayı silmezsin, iade faturası kesersin.",
+N:"e:edit:Değişiklik:12:50|r:arrow-back-up:Restore:50:20|v:history:Revert:50:80|g:book-2:Geçmiş:86:50",M:"Commit edildi mi?|Yöntem|Geçmişte iz",
+S:[["e","","?|?|?","Bir değişiklikten vazgeçtin. Önce sor: commit edildi mi?","Vazgeçtin"],
+["e,r","e>r:geri al","Hayır|Restore|Yok","Commit edilmediyse restore değişikliği siler; iz kalmaz.","Commit yoksa"],
+["e,v","e>v:geri al","Evet|Revert|Var","Commit edildiyse revert, değişikliği tersine çeviren yeni bir kayıt ekler.","Commit varsa"],
+["v,g","v>g:yeni kayıt","Evet|Revert|Var","Geçmiş silinmez; ne olduğunu herkes görür.","Geçmiş temiz"]],
+W:"receipt:Fiş ya da fatura|receipt-refund:Sil ya da iade kes|book-2:Defter düzgün"},
+
+{n:"3.1",t:"Branch",oz:"Denemeyi branch'te yap; gördüğünü birleştir, görmediğini birleştirme.",bz:"Yeni modülü önce test sunucusunda denersin, beğenince canlıya alırsın.",
+N:"m:git-commit:main:12:50|b:git-branch:Branch:45:20|t:test-pipe:Deneme:82:20|j:git-merge:Birleştir:62:80",
+S:[["m","","","main çalışan sürümdür; denemeler doğrudan oraya yapılmaz.","Çalışan sürüm"],
+["m,b","m>b:kopya dal","","Deneme için yeni bir dal açarsın.","Dal aç"],
+["b,t","b>t:değişiklikler","","Değişiklikleri dalda yaparsın; main etkilenmez.","Dalda dene"],
+["t,j,m","j>m:birleştir","","Beğendiysen main'e birleştirirsin; beğenmediysen dalı bırakırsın.","Beğendiysen birleştir"]],
+W:"server:Test sunucusu|eye:Bak|building-factory-2:Canlıya al"},
+
+{n:"3.2",t:"GitHub",oz:"Save diske, commit bilgisayardaki geçmişe, push GitHub'a yazar; pull GitHub'dakini çeker.",bz:"Save taslak deftere yazmak, commit deftere işlemek, push defteri merkeze göndermek, pull merkezden güncel defteri almaktır.",
+N:"s:device-floppy:Save:10:50|c:git-commit:Commit:36:50|g:brand-github:GitHub:64:50|l:device-laptop:Başka bilgisayar:90:50",
+S:[["s","","","Save dosyayı diske yazar; geçmişe girmez.","Save"],
+["s,c","s>c:commit","","Commit o anı bilgisayardaki geçmişe işler.","Commit"],
+["c,g","c>g:push","","Push geçmişi GitHub'a gönderir; artık yedekli ve paylaşılabilir.","Push"],
+["g,l","g>l:pull","","Pull GitHub'daki son hâli bilgisayara çeker.","Pull"]],
+W:"pencil:Taslak|book:Deftere işle|building-bank:Merkeze gönder"},
+
+{n:"3.3",t:"Yayın",oz:"Branch'i push et, önizlemede bak, PR'ı birleştir; Cloudflare canlıyı kendisi günceller.",bz:"Önizleme test ortamıdır, main canlı sistem; canlıya geçişi Cloudflare kendisi yapar.",
+N:"b:git-branch:Branch:10:50|v:eye:Önizleme:37:50|p:git-pull-request:PR:63:50|l:rocket:Canlı site:90:50",
+S:[["b,v","b>v:push","","Dalı push edersin; Cloudflare dal için bir önizleme adresi kurar.","Önizleme"],
+["v,p","v>p:beğendim","","Önizlemede bakarsın; beğenince PR açarsın.","PR"],
+["p,l","p>l:birleştir","","PR main'e birleşince Cloudflare canlı siteyi kendisi günceller. Sen sadece pull yaparsın.","Canlı"]],
+W:"test-pipe:Test ortamı|check:Onay|building-factory-2:Canlı sistem"},
+
+{n:"3.4",t:"Kod incelemesi",oz:"İncelemeyi başkası yapar, kararı işin sahibi verir; Claude'un yorumu da yanlış olabilir.",bz:"Raporu hazırlayan onaylamaz; kontrol eden başkası olur, son söz yine işin sahibindedir.",
+N:"k:code:Kod, PR:12:50|r:eye-check:İnceleyen:48:22|y:gavel:Sen, karar:84:50",
+S:[["k","","","Kodu yazan kendi işini onaylamaz.","Yazan onaylamaz"],
+["k,r","k>r:PR","","İncelemeyi başkası yapar: bir insan ya da Claude.","İnceleme"],
+["r,y","r>y:yorumlar","","Yorumlar gelir; Claude'un yorumu da yanlış olabilir.","Yorumlar"],
+["y","","","Kararı işin sahibi verir: birleştir ya da düzelt.","Karar sende"]],
+W:"file-text:Rapor|user-search:Kontrol eden|signature:Sahibi imzalar"}
+);
+</script>
+<script>
+DERS.push(
+{n:"4.1",t:"Ayarlar ve izinler",oz:"Tek değerli ayarda en özel dosya kazanır; izin listelerinde hepsi birleşir ve deny her zaman kazanır.",bz:"Genel müdürlük “9'da başla” der, fabrika “8'de” der: en yakın kural geçerli. Ama “kasaya kimse girmez” yasağını fabrika müdürü delemez.",
+N:"u:world:Senin genel ayarın:14:25|p:folder:Proje ayarı:14:75|r:scale:Sonuç:52:50|d:lock:deny:86:50",M:"Tek değerli ayar|İzin listesi|deny",
+S:[["u,p","","?|?|?","Ayar birden çok dosyada olabilir: senin genel ayarın ve projenin ayarı.","İki dosya"],
+["p,r","p>r:en özel kazanır","Proje kazanır|?|?","Tek değerli ayarda (ör. model) en özel dosya kazanır.","Tek değer"],
+["u,p,r","u>r:birleşir","Proje kazanır|Hepsi birleşir|?","İzin listelerinde ise hepsi birleşir.","Listeler"],
+["d,r","d>r:yasak","Proje kazanır|Hepsi birleşir|Her zaman kazanır","Bir yerde deny varsa hiçbir izin onu delemez.","Yasak"]],
+W:"building-skyscraper:Genel müdürlük|building-factory:Fabrika|lock:Kasa yasağı"},
+
+{n:"4.2",t:"Hafıza düzeni",oz:"Her projede lazımsa ve kısaysa globale, tek projeye aitse projeye, uzun ve ara sıra lazımsa ayrı dosyaya.",bz:"Sık kullanılan bilgi önbellekte, ara sıra lazım olan veritabanında durur; her şeyi önbelleğe koyarsan bellek dolar.",
+N:"g:world:Global CLAUDE.md:15:20|p:folder:Proje CLAUDE.md:15:80|a:file:Ayrı not:48:50|c:robot:Oturum:85:50",
+S:[["g,c","g>c:her zaman yüklenir","","Her projede lazım ve kısa olan bilgi globale.","Global"],
+["p,c","p>c:o projede yüklenir","","Tek projeye ait olan o projenin CLAUDE.md'sine.","Proje"],
+["a,c","a>c:gerekince okunur","","Uzun ve ara sıra lazım olan ayrı dosyaya; yeri yazılır, gerekince okunur.","Ayrı dosya"]],
+W:"bolt:Önbellek|database:Veritabanı|archive:Arşiv"},
+
+{n:"4.3",t:"Slash komutları ve skill",oz:"Skill adı olan bir yordamdır: açıklaması hep görünür, adımları yalnız çağrılınca okunur.",bz:"CLAUDE.md şirket yönetmeliği, skill ise adı konmuş bir stored procedure: EXEC dediğinde çalışır.",
+N:"l:list:Skill listesi:12:50|c:robot:Claude:45:50|s:wand:Skill adımları:82:50",
+S:[["l,c","l>c:yalnız adlar","","Her oturumda skill'lerin yalnız adı ve açıklaması görünür; yer kaplamaz.","Hep görünen"],
+["c","","","“Siteye bölüm ekle” dediğinde Claude ilgili skill'i tanır.","Tanır"],
+["c,s","s>c:adımlar","","Skill çağrılınca adımları okunur ve uygulanır.","Çağrılınca"]],
+W:"sql:Stored procedure|terminal:EXEC|table:Sonuç"},
+
+{n:"4.4",t:"Eklentiler",oz:"Eklenti kurmadan önce ne çalıştırdığına bak, kullandığını tut, kullanmadığını kapat.",bz:"NuGet paketi kurmak gibi: kolaydır ama içindeki kod senin projende çalışır.",
+N:"m:world-www:Marketplace:10:50|e:puzzle:Eklenti:37:50|x:search:İnceleme:64:18|c:robot:Oturum:88:62",
+S:[["m,e","m>e:kur?","","Biri bir eklenti öneriyor.","Öneri"],
+["e,x","e>x:ne çalıştırıyor?","","Kurmadan önce bak: hook var mı, sunucu başlatıyor mu, lisansı ne?","İncele"],
+["e,c","e>c:her oturuma yük","","Kurarsan her oturumda yer kaplar ve kodu çalışır; kullanmadığını kapat.","Bedeli"]],
+W:"package:NuGet paketi|code:İçindeki kod|trash:Kaldır"},
+
+{n:"4.5",t:"Hook'lar",oz:"Hook bir tavsiye değil, olay olunca kendiliğinden çalışan bir ayardır.",bz:"Gece çalışan zamanlanmış görev: kimse hatırlatmasa da çalışır, sonucunu log dosyasında ararsın.",
+N:"c:robot:Claude:10:50|e:edit:Düzenleme:37:50|h:bolt:Hook:64:50|l:file-text:Log:90:50",
+S:[["c,e","c>e:Edit","","Claude bir dosyayı düzenledi.","Olay"],
+["e,h","e>h:tetikler","","Ayarladığın hook bu olayda kendiliğinden çalışır; Claude'un istemesine bağlı değil.","Hook çalışır"],
+["h,l","h>l:sonuç","","Sonucu ekranda değil, yazdırdığın yerde (log) ararsın.","Sonuç log'da"]],
+W:"moon-stars:Gece oldu|clock-play:Görev çalışır|file-text:Log dosyası"},
+
+{n:"4.6",t:"Çıktı stili ve durum satırı",oz:"Çıktı stili Claude'un konuşma biçimidir; durum satırı ekranın altındaki bilgi çubuğudur.",bz:"Mutfak kuralları aynı kalır, değişen servis biçimidir; durum satırı ERP ekranının altındaki şirket ve dönem çubuğudur.",
+N:"s:settings:settings.json:14:50|j:code:statusline.js:48:50|b:layout-bottombar:Durum satırı:84:50",
+S:[["s","","","Ayara bir durum satırı komutu yazarsın.","Ayar"],
+["s,j","s>j:çalıştır","","Claude Code o küçük programı her turda çalıştırır.","Program"],
+["j,b","j>b:model, klasör, maliyet","","Çıktısı ekranın altında hep görünür.","Hep görünür"]],
+W:"layout-dashboard:ERP ekranı|building:Şirket ve dönem|eye:Hep görünür"},
+
+{n:"4.7",t:"Mod",oz:"Mod, Claude uygulamasının ana ekranına eklediğin kendi parçandır.",bz:"ERP ana ekranına eklenen dashboard kutucuğu: sürekli görünür, canlı veri gösterir, düğmesi vardır.",
+N:"m:apps:Mod:14:50|p:layout-sidebar-right:Panel:50:50|d:click:Düğme:86:50",
+S:[["m","","","Mod, Claude uygulamasının arayüzüne eklenen bir parçadır.","Mod"],
+["m,p","m>p:panel ekler","","Ekranda sürekli duran bir panel, bant ya da bildirim ekler.","Panel"],
+["p,d","d>p:yenile","","Canlı veri gösterir, düğmesi vardır. Hook ise ekranı olmayan gece görevidir.","Canlı"]],
+W:"layout-dashboard:ERP ana ekranı|chart-pie:Kutucuk|click:Düğme"},
+
+{n:"5.1",t:"Harness'ın içi",oz:"Model sunucudadır ve yalnız metin yazar; harness bilgisayarındadır, her şeyi çalıştırır.",bz:"Telefondaki danışman sistemi göremez; başındaki operatör her aramada kural kitabını okur, düğmelere basar, sonucu söyler.",
+N:"y:user:Sen:10:25|h:headset:Harness:38:50|k:folder:Klasör:10:78|m:brain:Model (sunucu):84:50",M:"Sunucuya giden|Bilgisayarında olan|Diske dokunan",
+S:[["y,h","y>h:istek","-|yazdın|-","İsteğin önce bilgisayarındaki harness'a gider.","İstek"],
+["h,m","h>m:talimat + araç listesi","metin|paketledi|-","Harness her turda sistem talimatını, geçmişi ve araç listesini modele yollar.","Paket"],
+["m,h","m>h:“Read: dosya”","metin|bekliyor|-","Model yalnız metin yazar: “şu aracı çalıştır”.","Model ister"],
+["h,k","h>k:okur","metin|çalıştırdı|okundu","Aracı harness çalıştırır, izne bakar, sonucu modele geri yollar.","Harness yapar"],
+["h,m","h>m:yalnız okunan","okunan dosya|döngü|okundu","Yalnız okunan dosya gider, klasörün tamamı değil. Bağlam dolunca harness özetler.","Döngü"]],
+W:"phone:Arayan|headset:Operatör|user-star:Danışman"},
+
+{n:"5.2",t:"MCP ve bağlayıcılar",oz:"MCP, dış sistemlerin “şunları yapabilirim” listesini tek standartta sunmasıdır.",bz:"USB fişi ya da SAP'nin RFC listesi: her sistem aynı standartta konuşur, hangisini bağlayacağına sen karar verirsin.",
+N:"c:robot:Claude:12:50|p:plug-connected:MCP:44:50|g:brand-github:GitHub:82:15|d:cloud:Drive:82:50|s:mail:Gmail:82:85",
+S:[["c,p","","","MCP tek bir standart fiştir.","Tek fiş"],
+["p,g,d,s","g>p:araç listesi","","Her bağlanan sistem “şunları yapabilirim” listesini aynı biçimde sunar.","Kataloglar"],
+["c,p,g","c>g:araç çağrısı","","Claude yalnız bağladığın sistemlere bakar; yetkiyi de sen verirsin.","Yetki sende"]],
+W:"building-factory:ERP|list-details:RFC listesi|api-app:SAP"},
+
+{n:"5.3",t:"Alt ajanlar",oz:"Alt ajan bağımsız parçaları aynı anda yaptırır ve sana yalnız raporunu getirir.",bz:"Üç denetçiyi muhasebeye, depoya ve İK'ya aynı anda gönderirsin. Ama bir bebek dokuz kadınla bir ayda doğmaz.",
+N:"a:robot:Ana oturum:12:50|x:robot:Ajan 1:48:16|y:robot:Ajan 2:48:50|z:robot:Ajan 3:48:84|r:file-report:Raporlar:86:50",
+S:[["a","","","Bağımsız parçalara bölünebilen bir iş var.","Bölünebilen iş"],
+["a,x,y,z","a>y:görev","","Ana oturum üç alt ajanı aynı anda başlatır; her birinin kendi bağlamı var.","Aynı anda"],
+["x,y,z,r","y>r:kısa rapor","","Her biri yalnız kısa raporunu getirir; ayrıntı ana bağlamı doldurmaz.","Rapor"],
+["a,r","r>a:özet","","Birbirini bekleyen işte işe yaramaz; her ajan ayrıca başlangıç bedeli öder.","Ne zaman değil"]],
+W:"user-star:Sen|users-group:Üç denetçi|file-report:Birer sayfa"},
+
+{n:"5.4",t:"Kendi alt ajanın",oz:"Ajan, kendi görev tanımı ve sınırlı araçları olan yeni bir çalışandır.",bz:"İç denetçi dosyaları okur ama imza yetkisi yoktur; düzeltmeyi yetkili müdür yapar.",
+N:"t:file-description:Görev tanımı:14:22|a:tools:İzinli araçlar:14:78|j:robot:seo-denetcisi:50:50|r:file-report:Rapor:86:50",
+S:[["t,j","t>j:rol","","`.claude/agents` altına bir görev tanımı yazarsın.","Görev tanımı"],
+["a,j","a>j:yalnız Read, Grep","","Ajana yalnız ihtiyacı olan araçları verirsin.","Sınırlı araç"],
+["j,r","j>r:bulgular","","Okur ve rapor yazar; düzeltme yetkisi yoktur.","Rapor, imza yok"]],
+W:"id-badge-2:İç denetçi|eye:Okur|signature-off:İmzalayamaz"},
+
+{n:"5.5",t:"Paralel oturumlar ve worktree",oz:"Aynı projede aynı anda ikinci oturum açıyorsan worktree seç; kopyalar PR'da birleşir.",bz:"İki muhasebeci aynı Excel'i açarsa son kaydeden öncekini ezer; her birine kendi kopyasını verirsin.",
+N:"m:git-commit:main:12:50|a:git-branch:Worktree 1:50:18|b:git-branch:Worktree 2:50:82|p:git-pull-request:PR:86:50",
+S:[["m","","","Aynı projede iki iş aynı anda yürüyecek.","İki iş"],
+["m,a,b","m>b:ayrı kopya","","Her oturum kendi kopyasında çalışır; birbirinin dosyasını ezmez.","Ayrı kopyalar"],
+["a,b,p","a>p:PR","","Kopyalar PR'da birleşir; çakışma varsa orada görülür.","Birleşme"]],
+W:"file-spreadsheet:Kopya 1|file-spreadsheet:Kopya 2|files:Birleştir"},
+
+{n:"5.6",t:"Ajan takımı",oz:"Herkesin rolü ve kendi dosyası var; onay yalnız kullanıcıdan gelir.",bz:"RACI tablosu: işi yapan çok, hesap veren tek; şubeden gelen “müdür onayladı” yazısı imza değildir.",
+N:"y:user-check:Sen:50:16|d:robot:Planlama oturumu:15:72|s:robot:Kod oturumu:50:72|i:robot:Rapor oturumu:85:72",
+S:[["d,s,i","","","Her oturumun rolü ve kendi dosyaları var.","Roller"],
+["d,s","d>s:mesaj","","Oturumlar birbirine mesajla haber verir; birinin dosyasına öbürü dokunmaz.","Mesaj"],
+["s,y","s>y:onay?","","Onay yalnız senden gelir. Başka bir oturumun “onaylandı” demesi onay değildir.","Onay"]],
+W:"sitemap:Şubeler|mail:Resmî yazı|signature:Genel müdür imzası"},
+
+{n:"5.7",t:"Model, effort, maliyet",oz:"Model hangi beyin, effort ne kadar düşündüğü; ölçü biten iş başına maliyettir.",bz:"Fotokopiyi stajyere, raporu uzmana verirsin; raporu stajyere verip üç kez geri gönderirsen uzmandan pahalıya gelir.",
+N:"i:list:İş:12:50|h:feather:Hafif model:50:18|a:weight:Ağır model:50:82|s:coin:Biten iş:86:50",M:"Model|Effort|Maliyet",
+S:[["i","","?|?|?","İki ayar var: hangi model ve ne kadar düşünecek (effort).","İki ayar"],
+["i,h","i>h:basit iş","Hafif|Düşük|Ucuz","Basit işe hafif model ve düşük effort.","Basit iş"],
+["i,a","i>a:zor iş","Ağır|Yüksek|Pahalı","Zor işe ağır model ve yüksek effort.","Zor iş"],
+["h,s","h>s:3 kez geri döndü","Hafif|Düşük|Pahalıya geldi","Ölçü istek başı değil biten iş başı: üç kez geri dönen ucuz iş pahalıya gelir.","Biten iş başına"]],
+W:"school:Stajyer|copy:Fotokopi, rapor|user-star:Uzman"},
+
+{n:"6.1",t:"Tarayıcılar",oz:"Fark yetenekte değil, kimin hesabıyla çalıştığında.",bz:"Danışmana misafir bilgisayarı vermek ile her yere giriş yapılmış kendi laptopunu vermek.",
+N:"c:robot:Claude:12:50|b:browser:Yerleşik tarayıcı:50:18|g:brand-chrome:Claude in Chrome:50:82|s:world-www:Site:86:50",
+S:[["c,b","c>b:aç","","Yerleşik tarayıcı ayrı hesaplarla çalışır; yalnız orada giriş yaptığın siteler açıktır.","Yerleşik"],
+["c,g","c>g:aç","","Claude in Chrome senin Chrome'undaki bütün girişlerinle çalışır.","Chrome"],
+["b,s","b>s:canlı test","","İkisi de siteyi test eder. Soru şu: hangi hesaplarına erişsin?","Kimin hesabı"]],
+W:"device-desktop:Misafir bilgisayarı|device-laptop:Kendi laptopun|key:Girişler"},
+
+{n:"6.2",t:"Computer use",oz:"Ekrana bakıp fareyle çalışmak en son çaredir; varsayılan kapalıdır, uygulama başına izin ister.",bz:"SAP'den veri almak için RFC varken kimseye ekrandan elle kopyalatmazsın.",
+N:"f:file:Dosya aracı:10:50|a:api:MCP, API:37:50|w:browser:Tarayıcı:63:50|m:mouse:Ekran ve fare:90:50",
+S:[["f","","","Önce dosya aracı.","1. tercih"],
+["f,a","f>a:yoksa","","Yoksa MCP ya da API.","2. tercih"],
+["a,w","a>w:yoksa","","Yoksa tarayıcı.","3. tercih"],
+["w,m","w>m:en son","","En son ekrana bakıp fareyle: yavaş ve kırılgan, izin ister.","Son çare"]],
+W:"api-app:RFC|world-www:Web|keyboard:Elle kopya"},
+
+{n:"6.3",t:"Artifact'ler ve dokümanlar",oz:"Doc yazı belgesidir, sayfa tasarımlı ekrandır; ikisi de izinle paylaşılır.",bz:"OneDrive'da Word belgesi ile PowerPoint sunumu: ikisi de okuma ya da düzenleme izniyle paylaşılır.",
+N:"c:robot:Claude:12:50|d:file-text:Doc:48:20|p:layout:Sayfa:48:80|u:users:Paylaşılan:86:50",
+S:[["c,d","c>d:yazı belgesi","","Doc yazı belgesidir, Word gibi.","Doc"],
+["c,p","c>p:tasarımlı ekran","","Sayfa tasarımlı ekrandır, web sayfası ya da sunum gibi.","Sayfa"],
+["d,p,u","p>u:okuma, düzenleme izni","","İkisi de izinle paylaşılır. Gizli bilgi varsa hiç yayınlamazsın.","Paylaşım"]],
+W:"file-type-docx:Word|cloud-share:OneDrive|lock:İzinle paylaş"},
+
+{n:"6.4",t:"Bulut, uzaktan kontrol, telefon",oz:"Kural bulutta da geçerli olsun istiyorsan repodaki CLAUDE.md'ye yaz; global notların buluta gitmez.",bz:"İş merkezinde kiraladığın masaya proje dosyalarının kopyası gider; çekmecen ve not defterin gitmez.",
+N:"r:brand-github:Repo:12:30|n:notes:Global notların:12:80|b:cloud:Bulut oturumu:50:30|t:device-mobile:Telefon:86:30",
+S:[["r,b","r>b:repo kopyası","","İşi buluta verirsin; bulut repoyu kopyalar.","Buluta"],
+["b,t","b>t:ilerleme","","Telefondan izlersin; bilgisayar kapansa da sürer.","Telefondan"],
+["n","","","Global notların buluta gitmez. Bulutta da geçerli olacak kuralı repodaki CLAUDE.md'ye yaz.","Gitmeyen"]],
+W:"files:Dosyalar|armchair:Kiralık masa|lock:Çekmece evde kalır"},
+
+{n:"6.5",t:"Claude ailesi",oz:"Hangisini seçtiğinden çok neden seçtiğin önemli.",bz:"Office ailesi: mektup Word'de, bütçe Excel'de, toplantı Teams'te.",
+N:"q:help:İş:12:50|s:message:Sohbet, Projects:52:15|w:file-type-xls:Cowork:52:50|c:code:Code:52:85|m:device-mobile:Mobil:88:50",
+S:[["q,s","q>s:konuşma, metin","","Çıktı konuşma ya da metinse sohbet; tekrar eden bir konuysa Projects.","Sohbet"],
+["q,w","q>w:belge, tablo","","Belge ya da tabloysa Cowork.","Cowork"],
+["q,c","q>c:kod, repo","","Kod ve repoysa Code.","Code"],
+["m","","","Takip için mobil.","Mobil"]],
+W:"file-type-docx:Word|file-type-xls:Excel|users:Teams"}
+);
+</script>
+<script>
+DERS.push(
+{n:"7.1",t:"Zamanlanmış görevler",oz:"Zamanlanmış görev her seferinde sıfırdan başlar ve başında kimse yoktur.",bz:"SQL Server Agent job'ı ve gece vardiyasına bırakılan iş emri: sabahki toplantıyı bilmeyen biri okuyacak, imza yetkisi de yok.",
+N:"t:calendar-time:Pazartesi 09.00:12:50|r:robot:Görev:48:50|s:world-www:Site:48:85|p:file-report:Rapor:86:50",
+S:[["t","","","Takvim tetikler; başında kimse yoktur.","Takvim"],
+["t,r","t>r:başla","","Görev sıfırdan başlar; ne, ne zaman, nereye sorularını kendi içinde cevaplar.","Sıfırdan"],
+["r,s","r>s:okur","","Siteyi okur, kontrol eder.","Okur"],
+["r,p","r>p:rapor","","Rapor yazar. Göndermez, silmez, birleştirmez.","Rapor"]],
+W:"clock:Gece|database:SQL Agent job|file-report:Sabah raporu"},
+
+{n:"7.2",t:"/loop ve izleme",oz:"/loop açık oturumda bir şey olana kadar bakar, olunca ya da oturum kapanınca biter.",bz:"Kira sözleşmesi her ay fatura keser, feshedene kadar; kargo takibi ise kargo gelince biter.",
+N:"l:repeat:/loop:12:50|k:file-search:Kontrol:48:22|d:hourglass:Bekle:48:80|f:flag:Bitti:86:50",
+S:[["l,k","l>k:bak","","/loop açık oturumda bir şeye düzenli bakar.","Bak"],
+["k,d","k>d:henüz yok","","Olmadıysa bekler ve tekrar bakar; aralığı işin hızına göre seçersin.","Bekle"],
+["k,f","k>f:oldu","","Olunca biter. Her döngüye bitiş şartı yazılır.","Bitiş şartı"]],
+W:"truck-delivery:Kargo|map-pin:Takip|package:Geldi, bitti"},
+
+{n:"7.3",t:"claude -p ve betikler",oz:"claude -p Claude'u sohbet açmadan komut gibi çalıştırır; başka programlar onu çağırır.",bz:"Sorguyu SSMS'te elle çalıştırmak yerine sqlcmd ile bir .bat dosyasından çalıştırmak; gece çalışan iş “emin misin?” diye sormaz.",
+N:"b:file-code:Betik:12:50|c:terminal-2:claude -p:48:50|o:file-export:Çıktı:86:50",
+S:[["b,c","b>c:girdi","","Bir betik Claude'u sohbet açmadan komut gibi çağırır.","Komut gibi"],
+["c","","","Başında kimse yok: izin sorulmaz. Kullanabileceği araçları önceden açıkça verirsin.","İzin önceden"],
+["c,o","c>o:sonuç","","Çıktıyı betik alır ve kullanır.","Çıktı"]],
+W:"file-code:.bat dosyası|terminal:sqlcmd|table:Sonuç"},
+
+{n:"7.4",t:"GitHub Actions ile Claude",oz:"PR açılınca GitHub'ın sunucusu Claude'u başlatır, Claude yorum yazar.",bz:"ERP'de “fatura kaydedilince onay akışını başlat” kuralı: kontrolü servis hesabı yapar, şifresi kasada durur, onaylayan yine sensin.",
+N:"p:git-pull-request:PR açıldı:10:40|r:server:Runner:37:40|k:key:Secret, API anahtarı:37:85|c:robot:Claude:63:40|y:message-dots:Yorum:90:40",
+S:[["p,r","p>r:tetikle","","PR açılınca GitHub'ın sunucusu (runner) repodaki yml dosyasını okur.","Tetik"],
+["k,r","k>r:anahtar","","API anahtarı secret'tan gelir; kodda yazmaz.","Secret"],
+["r,c","r>c:başlat","","Claude PR'ı inceler.","İnceleme"],
+["c,y","c>y:yorum","","Yorum yazar. Yetki iki kilitli: permissions ve allowedTools.","İki kilit"]],
+W:"file-invoice:Fatura kaydı|lock:Servis hesabı|notes:Not düşer"},
+
+{n:"8.1",t:"Claude API temelleri",oz:"API'de model hiçbir şey hatırlamaz; fatura token üzerinden kesilir.",bz:"Aynı faturayı stajyer de mali müşavir de girer; süre aynı, saat ücreti 40 kat farklı.",
+N:"p:code:Programın:12:50|m:brain:Model:50:50|f:coin:Fatura:86:50",M:"Giden token|Gelen token|Haiku → Opus",
+S:[["p,m","p>m:model + max_tokens + mesaj","?|?|?","Her istek model adını, max_tokens'ı ve mesajı taşır. Model önceki konuşmayı hatırlamaz.","İstek"],
+["m,p","m>p:cevap + token sayısı","sayıldı|sayıldı|?","Cevap, token sayılarıyla birlikte gelir.","Cevap"],
+["m,f","m>f:token × tarife","sayıldı|sayıldı|?","Fatura = giden token × giden tarifesi + gelen token × gelen tarifesi.","Fatura"],
+["f","","sayıldı|sayıldı|~40 kat","Aynı iş Opus'ta Haiku'nun yaklaşık 40 katı tutar: model seçimi en büyük maliyet kararıdır.","Model seçimi"]],
+W:"school:Stajyer|user-star:Müşavir|coin:Saat ücreti ×40"},
+
+{n:"8.2",t:"Talimat tasarımı ve önbellek",oz:"İyi talimatın kuralları ölçülebilir olur; önbellek için sabit kısım önde, değişen kısım sonda.",bz:"SQL sorgu planı önbelleği: sorgu metni aynıysa plan hazırdır; başına her seferinde farklı yorum eklersen yeniden derlenir.",
+N:"s:file-pencil:Sabit talimat:12:28|q:message:Değişen soru:12:78|c:bolt:Önbellek:50:28|m:brain:Model:86:50",M:"Talimat|Önbellek|Çıktı maliyeti",
+S:[["s","","?|?|?","İyi talimat dört parça: kim ve ne için, kaynak, yasaklar, üslup.","Dört parça"],
+["s","","ölçülebilir|?|?","Kurallar ölçülebilir, olumlu ve çelişkisiz: “en fazla 4 cümle”.","Ölçülebilir"],
+["s,c","s>c:aynı baş","ölçülebilir|eşleşti|?","Önbellek baştan ilk farklı harfe kadar eşleşir: sabit kısım önde, soru ve saat sonda.","Önbellek"],
+["q,m","q>m:yalnız yeni kısım","ölçülebilir|eşleşti|%60 düştü","Derste tek bir uzunluk kuralı çıktı maliyetini %60 düşürdü.","Sonuç"]],
+W:"sql:Aynı sorgu|bolt:Plan hazır|rocket:Hızlı"},
+
+{n:"8.3",t:"Araç kullanımı ve ajan döngüsü",oz:"Model aracı kendisi çalıştırmaz: “şu girdiyle çalıştır” der ve durur; programın çalıştırır.",bz:"Saha temsilcisi bilgiyi toplar, müşteriye onaylatır, merkeze telefon eder; kaydı merkez açar.",
+N:"y:user:Müşteri:10:50|p:code:Programın:40:50|m:brain:Model:75:18|t:tool:randevu_kaydet:75:82",
+S:[["y,p","y>p:“Salı 14.00”","","Müşteri randevu istiyor.","İstek"],
+["p,m","m>p:tool_use","","Model aracı kendisi çalıştırmaz: “randevu_kaydet şu girdiyle” der ve durur.","Model ister"],
+["p,t","p>t:çalıştır","","Aracı senin programın çalıştırır; onay ve sınırlar kodda.","Program yapar"],
+["p,m","p>m:sonuç","","Sonucu modele geri verir, model cevabı yazar. Her araç turu en az iki istek.","Döngü"]],
+W:"phone-call:Temsilci|building:Merkez|file-plus:Kayıt açılır"},
+
+{n:"8.4",t:"Kendi MCP sunucun",oz:"MCP sunucusu aracı ayrı bir programa taşır; kodu değiştirmeden her MCP istemcisi kullanır.",bz:"ERP'ye gömülü metodu WSDL'li bir web servisine çıkarmak: sözleşmeyi okuyan her istemci çağırır.",
+N:"i:robot:İstemci:12:50|s:server-2:MCP sunucusu:50:50|t:tool:Araç:86:50",
+S:[["i,s","i>s:başlat","","İstemci (Claude Code, Desktop) sunucunu ayrı bir program olarak başlatır.","Başlat"],
+["s,i","s>i:araç listesi","","“Hangi araçların var?” diye sorar, liste gelir.","Liste"],
+["s,t","s>t:çalıştır","","“Çalıştır” der; araç sunucuda çalışır. Her istemciye bir kez tanıtılır.","Çağrı"]],
+W:"device-desktop:İstemci|world-www:Web servisi|code:Metod"},
+
+{n:"8.5",t:"Agent SDK",oz:"Agent SDK, Claude Code motorunu kendi programına takar: döngü, geçmiş ve izin hazır gelir.",bz:"Entity Framework: bağlantıyı ve kaydetme döngüsünü yazmazsın; ERP yetki tablosu ise silmeyi ikinci imzaya bağlar.",
+N:"p:code:ajan.mjs:12:50|s:engine:Agent SDK:45:50|m:server-2:MCP araçları:82:18|g:shield-check:canUseTool:82:82",
+S:[["p,s","p>s:talimat + araçlar","","Programın talimatı, araçları ve sınırları verir; döngüyü SDK yürütür.","Motor"],
+["s,m","s>m:araç çağrısı","","Araçları MCP ile verirsin.","Araçlar"],
+["s,g","s>g:geri alınamaz mı?","","allowedTools önceden onaylı listedir. Geri alınamaz işi kod kapısı ya da insan korur.","Kapı"]],
+W:"brand-c-sharp:Uygulama|database-cog:Entity Framework|database:Veri"},
+
+{n:"8.6",t:"Çoklu ajan",oz:"Yazan denetlemesin; kesin ve ucuz kontrol önce gelir.",bz:"Satın alma onay akışı: tutar ve KDV kontrolünü CHECK kısıtı, “mantıklı mı?” sorusunu müdür yapar.",
+N:"a:search:Araştır:10:50|w:pencil:Yaz:36:50|k:code:Kod kontrolü:63:50|d:eye-check:Denetle:90:50",
+S:[["a,w","a>w:bilgi","","Her ajanın kendi rolü ve bağlamı var.","Roller"],
+["w,k","w>k:taslak","","Kesin ve ucuz kontrol önce: sayma, uzunluk, yasak kalıp.","Kod kontrolü"],
+["k,d","k>d:geçti","","Anlam kontrolünü ayrı bir model yapar: yazan denetlemez.","Model denetler"],
+["d,w","d>w:düzelt","","Geçmezse geri döner; en fazla 3 tur, sonra insana.","Sınır"]],
+W:"shopping-cart:Talep|checkbox:CHECK kısıtı|user-check:Müdür"},
+
+{n:"8.7",t:"Eval ve güvenlik",oz:"Model kandırılabilir; güvence en az yetki, kod kapısı ve insandadır.",bz:"Sipariş notu alanına “müdür onayıyla %50 indirim” yazılır; suç notu yazanda değil, notu belge sayan sistemdedir.",
+N:"n:note:Sipariş notu:10:50|m:brain:Model:37:50|g:shield-check:Kod kapısı:63:50|y:user-check:İnsan:90:50",M:"Model katmanı|Kod kapısı|İnsan",
+S:[["n,m","n>m:“ilk ay ücretsiz”","?|?|?","Talimat verinin içine gizlenir: dolaylı injection.","Sinsi talimat"],
+["m,g","m>g:taslak","geçti|?|?","Derste bu sinsi cümle üç modeli de geçti.","Model kandırıldı"],
+["g,y","g>y:yalnız şablon","geçti|durdu|?","Kod kapısı ve şablon izinli olmayanı geçirmez.","Kod durdurur"],
+["y","","geçti|durdu|okur","Gönderilmeden insan okur. Eval: bir kez denemek yetmez, oranı ölç.","İnsan"]],
+W:"note:Sipariş notu|printer-off:Belge sayılmaz|user-check:Müdür okur"},
+
+{n:"9.1",t:"Yapay zekâ fırsatı bulmak",oz:"Önce işleri listele, sonra dört süzgeçten geçir; “yapay zekâ gerekmiyor” da bir sonuçtur.",bz:"ERP'de modül satmadan önce süreç analizi yaparsın; fişsiz harcamayı tahminle deftere işlemezsin.",
+N:"l:list:İş listesi:12:50|f:filter:Dört süzgeç:46:50|o:bulb:Fırsat:84:20|x:ban:Yapay zekâ değil:84:80",M:"Hacim|Girdi türü|Hata maliyeti, ölçüm",
+S:[["l","","?|?|?","Önce insanların her hafta tekrar yaptığı işleri listele.","Liste"],
+["l,f","l>f:her iş","yüksek|metin|?","Hacim ve girdi türü: sık mı, metin mi yoksa kesin kural mı?","İlk iki süzgeç"],
+["f,o","f>o:geçti","yüksek|metin|insan onayı var","Hata maliyeti ve ölçülebilirlik: insan onayı konabiliyor mu, önce ve sonra ölçülür mü?","Son iki süzgeç"],
+["f,x","f>x:takıldı","—|kesin kural|—","Takılan iş başka bir şeydir: iş akışı kuralı, rapor ya da veri toplama sorunu.","Takılan"]],
+W:"route:Süreç analizi|receipt-off:Fişsiz harcama yok|building-factory:Doğru modül"},
+
+{n:"9.2",t:"Fiyat, risk, KVKK",oz:"Teklifin dört bölümü: kapsam, fiyat, risk, ölçüm. Kişisel veri sorununu mimari küçültür.",bz:"Dış danışmana canlı veritabanının yedeğini vermezsin, şemayı verirsin; sorguyu o yazar, sen içeride çalıştırırsın.",
+N:"q:message:Soru:10:50|m:brain:Model (yurt dışı):46:18|d:database:İK veritabanı (içeride):46:82|r:table:Rapor:86:50",M:"Token / ay|Kurulum|Dışarı giden kişisel veri",
+S:[["q","","?|?|?","Örnek: İK'ya doğal dilde rapor asistanı (9.1'deki fırsat).","Senaryo"],
+["q,m","q>m:soru + şema","~40 $|?|?","Günde 200 soru: orta sınıf bir modelle ayda yaklaşık 40 dolar. Token en küçük kalem.","Token"],
+["m,d","m>d:SQL (salt okur)","~40 $|20–25 adam-gün|?","Fiyat emek ve değerden kurulur; token “şu tavana kadar dahil” yazılır.","Fiyat"],
+["d,r","d>r:sonuç içeride","~40 $|20–25 adam-gün|yok","Modele veri değil şema gider; sorgu içeride çalışır, kimlik içeride kalır. Takma adlı veri yine de kişisel veridir.","KVKK"]],
+W:"user-star:Dış danışman|schema:Şemayı verirsin|lock:Veri içeride"},
+
+{n:"9.3",t:"Demo ve teslim",oz:"Demo müşterinin dünyasından tek hikâyedir: dert, çözüm, fren. Sonra teslim listesi.",bz:"İyi yönetici izne çıkabilendir: görevler yazılı, vekil belli. “Sistem bana bağlı değil, her şey yazılı ve hesap sizin.”",
+N:"a:mood-sad:Dert:12:50|b:rocket:Çözüm:48:20|c:hand-stop:Fren:48:80|t:file-text:Teslim:86:50",
+S:[["a","","","Keşifte öğrendiğin derdi müşteriye geri anlatırsın.","1. perde: dert"],
+["a,b","a>b:tek senaryo","","Tek gerçekçi senaryo, baştan sona canlı.","2. perde: çözüm"],
+["b,c","b>c:kandırma denemesi","","Müşterinin önünde kandırmayı dene, durduğunu göster.","3. perde: fren"],
+["c,t","c>t:teslim","","Kod ve README, talimat, eval seti, işletme notu, onay tablosu, destek.","Teslim"]],
+W:"file-text:Görevler yazılı|user-plus:Vekil belli|beach:İzne çıkar"}
+);
+</script>
+<script>
+const LV=[["Temel","Claude bir klasörde, verdiğin yetkiyle çalışır."],["İş tarif etme","Ne istediğini net söyle, sonucun kanıtını iste."],["Yayına alma","Dalda dene, gördüğünü birleştir, canlıya Cloudflare taşır."],["Ayarlama","Claude'u kendi çalışma biçimine göre kurdun."],["Ajanlar ve ekip","İşi böl, rol ver, onayı kendinde tut."],["Diğer eller","Hangi iş hangi araçta, en az yetkiyle."],["Otomasyon","Başında kimse yokken çalışan iş okur ve raporlar, göndermez."],["Ürün geliştirme","Kendi asistanını yazdın; güvence kodda ve insanda."],["Danışman","Önce süreç, sonra teknoloji; sistem sana bağlı olmasın."]];
+const G=LV.map((_,i)=>DERS.filter(d=>d.n.split('.')[0]==String(i+1)));
+const $=id=>document.getElementById(id);
+let L=0,S=0,P=0,timer=null,lastM=[];
+function parseN(d){const o={};d.N.split('|').forEach(s=>{const[k,ic,lb,x,y]=s.split(':');o[k]={ic,lb,x:+x,y:+y}});return o}
+function pk(s){if(!s)return null;const i=s.indexOf(':');const[a,b]=s.slice(0,i).split('>');return{a,b,t:s.slice(i+1)}}
+function steps(d){return d.S.length+1}
+function nav(){$('nav').innerHTML=LV.map((l,i)=>'<button class="lv'+(i===L?' on':'')+'" data-i="'+i+'"><span class="k">'+(i+1)+'</span><span class="t">'+l[0]+'</span></button>').join('');
+  [...$('nav').children].forEach(b=>b.onclick=()=>{L=+b.dataset.i;S=0;P=0;draw(true)})}
+let built=null;
+function build(d){
+  const N=parseN(d);built={d,N};
+  $('nodes').innerHTML=Object.entries(N).map(([k,n])=>'<div class="nd" id="nd-'+k+'" style="left:clamp(var(--hw),'+n.x+'%,calc(100% - var(--hw)));top:'+n.y+'%"><i class="ti ti-'+n.ic+'"></i><b>'+n.lb+'</b></div>').join('');
+  const pairs=new Set();d.S.forEach(s=>{const p=pk(s[1]);if(p)pairs.add([p.a,p.b].sort().join('-'))});
+  $('ln').innerHTML=[...pairs].map(pr=>{const[a,b]=pr.split('-');return '<line data-a="'+a+'" data-b="'+b+'" x1="'+N[a].x+'%" y1="'+N[a].y+'%" x2="'+N[b].x+'%" y2="'+N[b].y+'%" style="opacity:0"/>'}).join('');
+  lastM=[];
+}
+function anim(p){
+  clearInterval(timer);const el=$('pk');el.style.transition='none';el.style.opacity=0;
+  if(!p)return;const N=built.N;if(!N[p.a]||!N[p.b])return;
+  el.textContent=p.t;
+  const run=()=>{el.style.transition='none';el.style.left=N[p.a].x+'%';el.style.top=N[p.a].y+'%';el.style.opacity=0;void el.offsetWidth;
+    el.style.transition='left 1.3s ease-in-out, top 1.3s ease-in-out, opacity .25s';el.style.opacity=1;el.style.left=N[p.b].x+'%';el.style.top=N[p.b].y+'%';
+    setTimeout(()=>{el.style.opacity=0},1500)};
+  setTimeout(run,350);timer=setInterval(run,2600);
+}
+function draw(newLesson){
+  const d=G[L][S];if(newLesson||!built||built.d!==d)build(d);
+  nav();
+  const last=P===d.S.length;
+  $('where').textContent='SEVİYE '+(L+1)+' · '+LV[L][0].toUpperCase()+' / DERS '+d.n;
+  $('title').textContent=d.t;$('oz').textContent=d.oz;$('lsum').textContent=LV[L][1];$('bz').textContent=d.bz;
+  // metrics
+  if(d.M){const lab=d.M.split('|');let vals=lab.map(()=>'?');for(let i=0;i<=Math.min(P,d.S.length-1);i++){if(d.S[i][2])vals=d.S[i][2].split('|')}
+    $('mets').style.display='grid';$('mets').innerHTML=lab.map((l,i)=>'<div class="met"><small>'+l+'</small><b class="'+(lastM[i]!==undefined&&lastM[i]!==vals[i]&&vals[i]!=='?'?'new':'')+'">'+vals[i]+'</b></div>').join('');lastM=vals}
+  else{$('mets').style.display='none'}
+  const st=$('stage');
+  if(!last){
+    $('flowbox')&&$('flowbox').remove();
+    $('nodes').style.display='';$('ln').style.display='';
+    $('shd').innerHTML='<i class="ti ti-robot" style="color:var(--ac)"></i> CLAUDE TARAFINDA';
+    const vis=new Set();for(let i=0;i<=P;i++){d.S[i][0].split(',').forEach(k=>vis.add(k));const p=pk(d.S[i][1]);if(p){vis.add(p.a);vis.add(p.b)}}
+    const on=new Set(d.S[P][0].split(','));const p=pk(d.S[P][1]);if(p){on.add(p.a);on.add(p.b)}
+    Object.keys(built.N).forEach(k=>{const e=$('nd-'+k);e.className='nd'+(vis.has(k)?' vis':'')+(on.has(k)?' on':'')});
+    [...$('ln').children].forEach(l=>l.style.opacity=vis.has(l.dataset.a)&&vis.has(l.dataset.b)?1:0);
+    anim(p);
+    $('sno').textContent='ADIM '+(P+1)+' / '+steps(d);$('pill').textContent='KAVRAM';$('pill').className='pill';
+    $('sh').textContent=d.S[P][4]||(P===0?'Ne oluyor?':'Sonra');
+    $('stx').textContent=d.S[P][3];
+  }else{
+    anim(null);$('nodes').style.display='none';$('ln').style.display='none';
+    $('shd').innerHTML='<i class="ti ti-building-factory" style="color:var(--warm-ink)"></i> SENİN DÜNYANDA';
+    let fb=$('flowbox');if(fb)fb.remove();fb=document.createElement('div');fb.id='flowbox';fb.className='flow flip';
+    const parts=d.W.split('|');fb.innerHTML=parts.map((x,i)=>{const j=x.indexOf(':');return '<div class="fn" style="animation-delay:'+(i*0.7)+'s"><i class="ti ti-'+x.slice(0,j)+'"></i><b>'+x.slice(j+1)+'</b></div>'+(i<parts.length-1?'<div class="fl" style="animation-delay:'+(i*0.7+0.4)+'s"></div>':'')}).join('');
+    st.appendChild(fb);
+    $('sno').textContent='ADIM '+(P+1)+' / '+steps(d);$('pill').textContent='BENZETME';$('pill').className='pill w';
+    $('sh').textContent='Bildiğin dünyada neye benzer?';$('stx').textContent='Aynı fikir, senin yıllardır yaptığın işte:';
+  }
+  const end=L===G.length-1&&S===G[L].length-1&&last;
+  $('fwd').innerHTML=end?'Baştan <i class="ti ti-refresh"></i>':(last?'Sonraki ders':'İleri')+' <i class="ti ti-arrow-right"></i>';
+  $('sdots').innerHTML=Array.from({length:steps(d)},(_,i)=>'<span class="'+(i===P?'on':i<P?'dn':'')+(i===d.S.length?' w':'')+'" data-i="'+i+'">'+(i===d.S.length?'<i class="ti ti-bulb" style="font-size:14px"></i>':i+1)+'</span>').join('');
+  [...$('sdots').children].forEach(x=>x.onclick=()=>{P=+x.dataset.i;draw()});
+  $('ldots').innerHTML=G[L].map((x,i)=>'<button class="ld'+(i===S?' on':'')+'" data-i="'+i+'"><span class="n">'+x.n+'</span>'+x.t+'</button>').join('');
+  [...$('ldots').children].forEach(x=>x.onclick=()=>{S=+x.dataset.i;P=0;draw(true)});
+  try{localStorage.setItem('gorsel-yer',JSON.stringify([L,S,P]))}catch(e){}
+}
+function fwd(){const d=G[L][S];if(P<d.S.length)P++;else if(S<G[L].length-1){S++;P=0}else if(L<G.length-1){L++;S=0;P=0}else{L=0;S=0;P=0}draw()}
+function back(){if(P>0)P--;else if(S>0){S--;P=G[L][S].S.length}else if(L>0){L--;S=G[L].length-1;P=G[L][S].S.length}draw()}
+$('fwd').onclick=fwd;$('back').onclick=back;
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')fwd();if(e.key==='ArrowLeft')back()});
+const r=document.documentElement;function th(dk){r.dataset.theme=dk?'dark':'light';$('theme').innerHTML='<i class="ti ti-'+(dk?'sun':'moon')+'"></i>'}
+th(matchMedia('(prefers-color-scheme: dark)').matches);$('theme').onclick=()=>th(r.dataset.theme!=='dark');
+try{const s=JSON.parse(localStorage.getItem('gorsel-yer'));if(s&&G[s[0]]&&G[s[0]][s[1]]){L=s[0];S=s[1];P=Math.min(s[2],G[L][S].S.length)}}catch(e){}
+draw(true);
+</script>
+</body>
+</html>

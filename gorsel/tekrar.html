@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Ustalık · Tekrar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--bg:#F3EEE3;--panel:#FBF8F1;--ink:#2B2620;--soft:#6B6358;--line:#DDD4C3;--accent:#3E7B5B;--accent-bg:#E2EEDF;--idea:#ECE6F6;--idea-ink:#4A3D7A;--warm:#F5E3CC;--warm-ink:#8A4E14;color-scheme:light}
+:root[data-theme=dark]{--bg:#1D1B18;--panel:#272420;--ink:#EFE8DB;--soft:#B3A999;--line:#3D3832;--accent:#7FC29B;--accent-bg:#26382D;--idea:#2E2840;--idea-ink:#CFC3F2;--warm:#3D2E1E;--warm-ink:#F0C08A;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:19px;line-height:1.6}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
+header .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+header .logo i{font-size:26px;color:var(--accent)}
+header .sp{flex:1}
+.btn{font:inherit;font-size:16px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--soft)}
+.btn.main{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+:root[data-theme=dark] .btn.main{color:#13201A}
+.wrap{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:calc(100vh - 62px)}
+nav{border-right:1px solid var(--line);padding:18px 12px;overflow:auto}
+nav .lv{width:100%;text-align:left;border:0;background:none;color:var(--ink);font:inherit;font-size:17px;padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;gap:10px;align-items:center}
+nav .lv:hover{background:var(--line)}
+nav .lv.on{background:var(--accent-bg);color:var(--accent);font-weight:600}
+nav .lv .k{font-family:"JetBrains Mono",monospace;width:26px;height:26px;border-radius:7px;border:1px solid currentColor;display:grid;place-items:center;font-size:14px;flex:none}
+main{padding:22px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-content:start}
+.crumb{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.crumb small{color:var(--soft);font-size:15px}
+.crumb h1{margin:0;font-size:30px;line-height:1.25;width:100%}
+.tag{font-size:14px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel)}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:center;min-height:380px;position:relative;overflow:hidden}
+.stage .grid{position:absolute;inset:0;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px;opacity:.7}
+.scene{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
+.node{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:20px 14px;text-align:center;transition:all .45s}
+.node i{font-size:54px;display:block;margin-bottom:8px}
+.node b{display:block;font-size:17px;line-height:1.3}
+.node span{font-size:14px;color:var(--soft)}
+.node.claude i{color:var(--accent)}
+.node.world i{color:var(--warm-ink)}
+.node.dim{opacity:.3;filter:grayscale(1)}
+.node.lit{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg)}
+.node.world.lit{border-color:var(--warm-ink);box-shadow:0 0 0 4px var(--warm)}
+.link{font-size:36px;color:var(--soft);transition:all .45s}
+.link.lit{color:var(--accent);transform:scale(1.2)}
+.scene-hd{position:relative;font-size:14px;letter-spacing:.06em;color:var(--soft);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.scene-hd i{font-size:18px}
+.flow{position:relative;display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center}
+.fn{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:18px 8px;text-align:center;opacity:0;transform:translateY(14px) scale(.9);animation:pop .5s forwards}
+.fn i{font-size:46px;display:block;margin-bottom:6px}
+.fn b{font-size:16px;line-height:1.25;display:block}
+.c .fn{border-color:var(--accent)}.c .fn i{color:var(--accent)}
+.w .fn{border-color:var(--warm-ink);background:var(--warm)}.w .fn i{color:var(--warm-ink)}.w .fn b{color:var(--warm-ink)}
+.fl{position:relative;height:4px;margin:0 6px;background:var(--line);border-radius:2px;overflow:visible;opacity:0;animation:fade .3s forwards}
+.fl::after{content:"";position:absolute;top:-6px;left:0;width:16px;height:16px;border-radius:50%;background:var(--accent);animation:pkt 1.6s ease-in-out infinite;animation-delay:inherit}
+.w .fl::after{background:var(--warm-ink)}
+@keyframes pop{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+@keyframes pkt{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 16px);opacity:0}}
+.swap{animation:swap .5s}
+@keyframes swap{from{opacity:0;transform:rotateY(70deg)}to{opacity:1;transform:none}}
+@media(max-width:900px){.flow{grid-template-columns:1fr;gap:6px}.fl{width:4px;height:34px;margin:0 auto}.fl::after{left:-6px;animation-name:pktv}@keyframes pktv{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:calc(100% - 16px);opacity:0}}.fn i{font-size:36px}}
+.legend{position:relative;margin-top:22px;display:flex;gap:18px;font-size:15px;color:var(--soft);flex-wrap:wrap}
+.legend i{vertical-align:-3px}
+.side{display:flex;flex-direction:column;gap:16px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.step .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--soft);margin-bottom:6px}
+.pill{font-size:13px;padding:3px 10px;border-radius:999px;background:var(--warm);color:var(--warm-ink);font-weight:600}
+.step h2{margin:4px 0 10px;font-size:24px;line-height:1.3}
+.step p{margin:0 0 12px}
+.idea{background:var(--idea);color:var(--idea-ink);border-radius:12px;padding:14px 16px;display:flex;gap:12px;margin-top:6px}
+.idea i{font-size:26px}
+.idea small{display:block;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.05em;opacity:.8}
+.ctrl{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.dots{grid-column:1/-1;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.dots .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.dot{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--soft);font-family:"JetBrains Mono",monospace;font-size:13px;cursor:pointer}
+.dot.done{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
+.dot.on{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+:root[data-theme=dark] .dot.on{color:#13201A}
+.hint{font-size:14px;color:var(--soft);text-align:center;margin-top:8px}
+kbd{font-family:"JetBrains Mono",monospace;font-size:12px;border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--bg)}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}nav{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:10px}nav .lv{width:auto;white-space:nowrap}nav .lv .t{display:none}main{grid-template-columns:1fr;padding:16px}.stage{min-height:300px;padding:18px}.node i{font-size:40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo mono"><i class="ti ti-route"></i>Claude Ustalık</div>
+  <span class="tag mono">46 ders · tekrar</span>
+  <div class="sp"></div>
+  <button class="btn" id="theme" aria-label="Tema"><i class="ti ti-moon"></i></button>
+</header>
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main>
+    <div class="crumb">
+      <small class="mono" id="where"></small>
+      <span class="tag" id="cnt"></span>
+      <h1 class="mono" id="title"></h1>
+    </div>
+    <section class="stage">
+      <div class="grid"></div>
+      <div class="scene-hd mono" id="shd"></div>
+      <div class="flow" id="flow"></div>
+      <div class="legend"><span><i class="ti ti-circle-filled" style="color:var(--accent)"></i> öğrendiğin kavram</span><span><i class="ti ti-circle-filled" style="color:var(--warm-ink)"></i> bildiğin benzeri</span></div>
+    </section>
+    <div class="side">
+      <div class="step">
+        <div class="top"><span class="mono" id="stepno"></span><span class="pill" id="pill"></span></div>
+        <h2 id="sh"></h2>
+        <p id="sp"></p>
+        <div class="idea" id="idea"><i class="ti ti-bulb"></i><div><small>BENZETME</small><span id="bz"></span></div></div>
+        <div class="ctrl">
+          <button class="btn" id="back"><i class="ti ti-arrow-left"></i> Geri</button>
+          <button class="btn main" id="fwd">İleri <i class="ti ti-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="step">
+        <div class="top"><span class="mono">SEVİYENİN ÖZÜ</span></div>
+        <p id="lsum" style="margin:0;font-size:20px;font-weight:500"></p>
+      </div>
+    </div>
+    <div class="dots">
+      <div class="mono" style="font-size:14px;color:var(--soft)">BU SEVİYEDEKİ DERSLER</div>
+      <div class="row" id="dots"></div>
+      <div class="hint"><kbd>←</kbd> <kbd>→</kbd> ile de gezebilirsin</div>
+    </div>
+  </main>
+</div>
+<script>
+const D=[
+["Temel","Claude bir klasörde, verdiğin yetkiyle çalışır.",[
+["1.1","Oturum ve araçlar","Claude bir klasörde açılır; Read okur, Edit değiştirir, Grep arar, Bash komut çalıştırır.","Yeni çalışana bir ofis ve bir alet çantası verirsin; ofisin dışına kendiliğinden çıkmaz.","folder","Ofis ve alet çantası","briefcase"],
+["1.2","İzin modları","Mod, Claude'un ne kadar sormadan çalışacağını belirler.","Stajyere ilk hafta her işi sorarak yaptırırsın, kıdemliye “sen hallet” dersin.","shield-lock","Stajyer ve kıdemli","user-check"],
+["1.3","Bağlam","Bağlam geçici hafızadır, oturum kapanınca gider; kalıcı bilgi dosyaya yazılır.","Toplantıda konuşulan unutulur, kalan tutanaktır.","brain","Toplantı tutanağı","notes"],
+["1.4","CLAUDE.md","Projenin kalıcı talimatı; her oturum açılırken okunur.","İşe giren herkesin ilk gün okuduğu şirket el kitabı.","file-text","Şirket el kitabı","book"]]],
+["İş tarif etme","Ne istediğini net söyle, sonucun kanıtını iste.",[
+["2.1","İyi istek","Dört şey söyle: amaç, kapsam, kısıt, bitti ölçütü.","İyi bir iş emri: ne yapılacak, nereye kadar, neye dokunulmayacak, ne zaman bitmiş sayılır.","message","İş emri","clipboard-list"],
+["2.2","Plan modu","Büyük işte önce planı gör ve onayla, sonra yaptır.","Müteahhide önce projeyi çizdirirsin, sonra temeli kazdırırsın.","list-check","Mimari proje","building"],
+["2.3","Görsel vermek","Bin kelime yerine bir ekran görüntüsü göster.","Ustaya “şuna benzesin” diye fotoğraf göstermek.","photo","Ustaya fotoğraf","hammer"],
+["2.4","Kanıt istemek","“Yaptım” yetmez, kanıtını iste.","Teslim tutanağını imzalamadan malı kendi gözünle sayarsın.","circle-check","Teslim tutanağı","package"],
+["2.5","Geri alma","Commit edilmemişi restore siler; commit edilmişi revert yeni kayıtla geri alır.","Kaydedilmemiş fişi silersin; kesilmiş faturaya iade faturası kesersin.","arrow-back-up","İade faturası","receipt"]]],
+["Yayına alma","Dalda dene, gördüğünü birleştir, canlıya Cloudflare taşır.",[
+["3.1","Branch","Denemeyi ayrı dalda yap; beğendiğini birleştir.","Yeni modülü önce test sunucusunda denersin.","git-branch","Test sunucusu","server"],
+["3.2","GitHub","Commit bilgisayara, push GitHub'a yazar; pull geri çeker.","Deftere işlemek ve defteri merkeze göndermek.","brand-github","Merkeze giden defter","book-2"],
+["3.3","Yayın","PR'ı birleştirince Cloudflare canlıyı kendisi günceller.","Önizleme test ortamı, main canlı sistem.","rocket","Canlı sistem","building-factory-2"],
+["3.4","Kod incelemesi","İncelemeyi başkası yapar, kararı işin sahibi verir.","Raporu hazırlayan onaylamaz; son söz işin sahibinde.","eye-check","Kontrol eden müdür","signature"]]],
+["Ayarlama","Claude'u kendi çalışma biçimine göre kurdun.",[
+["4.1","Ayarlar ve izinler","En özel ayar kazanır; ama yasak (deny) her zaman kazanır.","Fabrika saati değiştirebilir, “kasaya kimse girmez” yasağını delemez.","settings","Kasa yasağı","lock"],
+["4.2","Hafıza düzeni","Her yerde lazımsa globale, tek projeye aitse projeye, ara sıra lazımsa ayrı dosyaya.","Sık kullanılan önbellekte, ara sıra lazım olan veritabanında.","stack-2","Önbellek ve veritabanı","database"],
+["4.3","Skill","Adı olan bir yordam; adımları yalnız çağrılınca okunur.","Stored procedure: EXEC deyince çalışır.","wand","Stored procedure","sql"],
+["4.4","Eklenti","Kurmadan önce ne çalıştırdığına bak, kullanmadığını kapat.","NuGet paketi: kurması kolay, ama kodu senin projende çalışır.","puzzle","NuGet paketi","package-import"],
+["4.5","Hook","Tavsiye değil, olay olunca kendiliğinden çalışan ayar.","Gece çalışan zamanlanmış görev; sonucu log dosyasında.","bolt","Gece görevi","moon-stars"],
+["4.6","Durum satırı","Ekranın altında hep görünen bilgi çubuğu.","ERP ekranının altındaki şirket ve dönem çubuğu.","layout-bottombar","ERP alt çubuğu","layout-dashboard"],
+["4.7","Mod","Claude uygulamasına eklenen ekranlı parça.","ERP ana ekranına eklenen dashboard kutucuğu.","apps","Dashboard kutucuğu","chart-pie"]]],
+["Ajanlar ve ekip","İşi böl, rol ver, onayı kendinde tut.",[
+["5.1","Harness","Model yalnız metin yazar; harness her şeyi çalıştırır.","Telefondaki danışman sistemi göremez; başındaki operatör düğmelere basar.","cpu","Danışman ve operatör","headset"],
+["5.2","MCP","Dış sistemler “şunları yapabilirim” listesini tek standartta sunar.","SAP'nin RFC listesi ya da USB fişi.","plug-connected","RFC listesi, USB","usb"],
+["5.3","Alt ajan","Bağımsız işleri aynı anda yaptırır, sana rapor getirir.","Üç denetçiyi muhasebeye, depoya, İK'ya aynı anda gönderirsin.","git-fork","Üç denetçi","users-group"],
+["5.4","Kendi ajanın","Kendi görev tanımı ve sınırlı aracı olan yeni çalışan.","İç denetçi dosyaları okur ama imza yetkisi yoktur.","robot","İç denetçi","id-badge-2"],
+["5.5","Worktree","Aynı projede paralel çalışacaksan her oturuma ayrı kopya.","İki muhasebeci aynı Excel'i açarsa biri öbürünü ezer.","copy","Herkese kendi Excel'i","file-spreadsheet"],
+["5.6","Ajan takımı","Herkesin rolü var, onay yalnız senden gelir.","RACI tablosu; şubeden gelen “müdür onayladı” yazısı imza değildir.","sitemap","RACI tablosu","table"],
+["5.7","Model ve effort","Basit işe hafif model, zor işe ağır model; biten iş başına maliyete bak.","Fotokopiyi stajyere, raporu uzmana verirsin.","adjustments","Stajyer ve uzman","school"]]],
+["Diğer eller","Hangi iş hangi araçta, en az yetkiyle.",[
+["6.1","Tarayıcı","Yerleşik tarayıcı ayrı hesapla, Chrome senin girişlerinle çalışır.","Danışmana misafir bilgisayarı mı, kendi laptopunu mu verirsin.","browser","Misafir bilgisayarı","device-laptop"],
+["6.2","Computer use","Ekrana bakıp fareyle çalışmak en son çare.","RFC varken kimseye ekrandan elle kopyalatmazsın.","mouse","Elle kopyalama","keyboard"],
+["6.3","Artifact","Belge ya da sayfayı yayınlayıp paylaşmak.","OneDrive'da paylaşılan Word ve PowerPoint dosyası.","share","OneDrive dosyası","cloud-share"],
+["6.4","Bulut oturumu","Bulutta yalnız repodaki kurallar geçerli.","Kiralık masaya dosyalar gider, çekmecen gitmez.","cloud","Kiralık masa","desk"],
+["6.5","Claude ailesi","Sohbet, Projects, Cowork, Code, mobil: her biri kendi işinde.","Office ailesi: mektup Word'de, bütçe Excel'de.","layout-grid","Office ailesi","files"]]],
+["Otomasyon","Başında kimse yokken çalışan iş okur ve raporlar, göndermez.",[
+["7.1","Zamanlanmış görev","Her seferinde sıfırdan başlar; okur, rapor yazar.","SQL Server Agent job'ı; gece vardiyasına bırakılan iş emri.","calendar-time","SQL Agent job","clock-play"],
+["7.2","/loop","Açık oturumda bir şey olana kadar bakar, olunca biter.","Kira her ay fatura keser; kargo takibi kargo gelince biter.","repeat","Kargo takibi","truck-delivery"],
+["7.3","claude -p","Claude'u komut gibi çalıştırmak; başka programlar çağırır.","Sorguyu sqlcmd ile bir .bat dosyasından çalıştırmak.","terminal-2","sqlcmd ve .bat","file-code"],
+["7.4","GitHub Actions","PR açılınca Claude kendiliğinden inceler.","Fatura kaydedilince başlayan onay akışı; şifre kasada.","git-pull-request","Otomatik onay akışı","file-invoice"]]],
+["Ürün geliştirme","Kendi asistanını yazdın; güvence kodda ve insanda.",[
+["8.1","API","Model hiçbir şey hatırlamaz; fatura token üzerinden.","Aynı faturayı stajyer de müşavir de girer, saat ücreti 40 kat farklı.","api","Saat ücreti farkı","coin"],
+["8.2","Talimat ve önbellek","İyi talimat ölçülebilir kural; sabit kısım önde.","SQL sorgu planı önbelleği: metin aynıysa plan hazır.","file-pencil","Sorgu planı önbelleği","database-search"],
+["8.3","Araç kullanımı","Model “çalıştır” der; aracı senin programın çalıştırır.","Saha temsilcisi bilgiyi toplar, kaydı merkez açar.","tool","Saha temsilcisi","phone-call"],
+["8.4","MCP sunucusu","Aracı ayrı programa taşırsın; her istemci kullanır.","ERP metodunu WSDL'li web servisine çıkarmak.","server-2","Web servisi","world-www"],
+["8.5","Agent SDK","Claude Code motorunu kendi programına takmak.","Entity Framework: döngüyü yazmazsın.","engine","Entity Framework","brand-c-sharp"],
+["8.6","Çoklu ajan","Yazan denetlemez; kesin kontrolü kod, anlamı model yapar.","Satın alma onay akışı; KDV'yi CHECK kısıtı kontrol eder.","affiliate","Onay akışı","shopping-cart"],
+["8.7","Eval ve güvenlik","Model kandırılabilir; güvence en az yetki, kod kapısı ve insan.","Sipariş notuna yazılan “müdür onayıyla %50 indirim”.","shield-check","Sahte sipariş notu","alert-triangle"]]],
+["Danışman","Önce süreç, sonra teknoloji; sistem sana bağlı olmasın.",[
+["9.1","Fırsat bulmak","Dört süzgeç: hacim, girdi türü, hata maliyeti, ölçülebilirlik.","ERP'de modül satmadan önce süreç analizi; fişsiz harcama deftere işlenmez.","filter","Süreç analizi","route"],
+["9.2","Teklif ve KVKK","Kapsam, fiyat, risk, ölçüm; modele veri değil şema gider.","Dış danışmana veritabanı yedeğini değil şemayı verirsin.","file-certificate","Şema, yedek değil","schema"],
+["9.3","Demo ve teslim","Dert, çözüm, fren. “Sistem bana bağlı değil, her şey yazılı, hesap sizin.”","İyi yönetici izne çıkabilendir: görevler yazılı, vekil belli.","presentation","İzne çıkabilen yönetici","beach"]]]
+];
+const F={
+"1.1":["folder:Klasör|tool:Araçlar|checks:Sonuç","briefcase:Ofis|tools:Alet çantası|checks:İş biter"],
+"1.2":["user:Sen|shield-lock:İzin modu|player-play:Claude yapar","school:Stajyer|user-question:Sorarak çalışır|user-check:Kıdemli halleder"],
+"1.3":["message:Sohbet|brain:Bağlam|file-text:Dosyaya yaz","users:Toplantı|mood-empty:Unutulur|notes:Tutanak kalır"],
+"1.4":["file-text:CLAUDE.md|refresh:Her oturum okur|robot:Kurala uyar","book:El kitabı|user-plus:Yeni çalışan okur|building:Kurala göre çalışır"],
+"2.1":["target:Amaç|ruler:Kapsam ve kısıt|flag:Bitti ölçütü","clipboard-list:Ne yapılacak|ban:Neye dokunulmaz|calendar-check:Ne zaman biter"],
+"2.2":["list-check:Plan|thumb-up:Onay|hammer:Uygulama","pencil:Proje çizimi|signature:Onay|shovel:Temel kazılır"],
+"2.3":["photo:Ekran görüntüsü|eye:Claude bakar|palette:Benzerini yapar","camera:Fotoğraf|hammer:Usta bakar|armchair:Aynısını yapar"],
+"2.4":["robot:“Yaptım”|file-search:Kanıt|circle-check:Onay","truck:Mal geldi|list-numbers:Kendin say|signature:İmza"],
+"2.5":["edit:Değişiklik|arrow-back-up:Restore ya da revert|history:Temiz geçmiş","receipt:Fiş ya da fatura|receipt-refund:Sil ya da iade kes|book-2:Defter düzgün"],
+"3.1":["git-branch:Branch|test-pipe:Dene|git-merge:Birleştir","server:Test sunucusu|eye:Bak|building-factory-2:Canlıya al"],
+"3.2":["device-floppy:Save|git-commit:Commit|cloud-upload:Push","pencil:Taslak|book:Deftere işle|building-bank:Merkeze gönder"],
+"3.3":["git-pull-request:PR|git-merge:Birleştir|rocket:Cloudflare yayınlar","test-pipe:Test ortamı|check:Onay|building-factory-2:Canlı sistem"],
+"3.4":["code:Kod|eye-check:İnceleme|gavel:Sahibi karar verir","file-text:Rapor|user-search:Kontrol eden|signature:Sahibi imzalar"],
+"4.1":["world:Global ayar|folder:Proje ayarı|lock:Deny kazanır","building-skyscraper:Genel müdürlük|building-factory:Fabrika|lock:Kasa yasağı"],
+"4.2":["world:Global|folder:Proje|file:Ayrı dosya","bolt:Önbellek|database:Veritabanı|archive:Arşiv"],
+"4.3":["wand:Skill adı|player-play:Çağır|list-numbers:Adımlar okunur","sql:Stored procedure|terminal:EXEC|table:Sonuç"],
+"4.4":["puzzle:Eklenti|search:Ne çalıştırıyor?|toggle-left:Gereksizse kapat","package:NuGet paketi|code:İçindeki kod|trash:Kaldır"],
+"4.5":["edit:Düzenleme oldu|bolt:Hook çalışır|file-text:Log","moon-stars:Gece oldu|clock-play:Görev çalışır|file-text:Log dosyası"],
+"4.6":["robot:Oturum|layout-bottombar:Durum satırı|eye:Hep görünür","layout-dashboard:ERP ekranı|building:Şirket ve dönem|eye:Hep görünür"],
+"4.7":["apps:Mod|layout-sidebar-right:Panel|refresh:Canlı veri","layout-dashboard:ERP ana ekranı|chart-pie:Kutucuk|click:Düğme"],
+"5.1":["user:Sen|cpu:Harness|brain:Model","phone:Arayan|headset:Operatör|user-star:Danışman"],
+"5.2":["robot:Claude|plug-connected:MCP|apps:Dış sistem","building-factory:ERP|list-details:RFC listesi|api-app:SAP"],
+"5.3":["robot:Ana oturum|git-fork:Üç alt ajan|file-report:Raporlar","user-star:Sen|users-group:Üç denetçi|file-report:Birer sayfa"],
+"5.4":["file-description:Görev tanımı|tools:Sınırlı araç|robot:Yeni ajan","id-badge-2:İç denetçi|eye:Okur|signature-off:İmzalayamaz"],
+"5.5":["git-branch:Kopya 1|git-branch:Kopya 2|git-merge:PR'da birleşir","file-spreadsheet:Excel kopyası 1|file-spreadsheet:Excel kopyası 2|files:Birleştir"],
+"5.6":["robot:Oturumlar|mail:Mesaj|user-check:Onay senden","sitemap:Şubeler|mail:Resmî yazı|signature:Genel müdür imzası"],
+"5.7":["feather:Hafif model|adjustments:Effort|weight:Ağır model","school:Stajyer|copy:Fotokopi, rapor|user-star:Uzman"],
+"6.1":["browser:Yerleşik tarayıcı|brand-chrome:Chrome|key:Kimin hesabı?","device-desktop:Misafir bilgisayar|device-laptop:Kendi laptopun|key:Girişler"],
+"6.2":["file:Dosya aracı|api:MCP, API|mouse:En son ekran","api-app:RFC|world-www:Web|keyboard:Elle kopya"],
+"6.3":["file-text:Belge, sayfa|share:Yayınla|users:Paylaş","file-type-docx:Word|cloud-share:OneDrive|lock:İzinle paylaş"],
+"6.4":["brand-github:Repo|cloud:Bulut oturumu|device-mobile:Telefondan izle","files:Dosyalar|armchair:Kiralık masa|lock:Çekmece evde kalır"],
+"6.5":["message:Sohbet|folders:Projects, Cowork|code:Code","file-type-docx:Word|file-type-xls:Excel|users:Teams"],
+"7.1":["calendar-time:Takvim|robot:Sıfırdan başlar|file-report:Rapor","clock:Gece|database:SQL Agent job|file-report:Sabah raporu"],
+"7.2":["repeat:Bak|hourglass:Bekle|flag:Olunca bitir","truck-delivery:Kargo|map-pin:Takip|package:Geldi, bitti"],
+"7.3":["terminal-2:Betik|robot:claude -p|file-export:Çıktı","file-code:.bat dosyası|terminal:sqlcmd|table:Sonuç"],
+"7.4":["git-pull-request:PR açıldı|server:Runner|message-dots:Claude yorum yazar","file-invoice:Fatura kaydı|lock:Servis hesabı|notes:Not düşer"],
+"8.1":["send:İstek|cpu:Model|coin:Token faturası","school:Stajyer|user-star:Müşavir|coin:Saat ücreti ×40"],
+"8.2":["file-pencil:Sabit talimat|bolt:Önbellek|message:Değişen soru","sql:Aynı sorgu|bolt:Plan hazır|rocket:Hızlı"],
+"8.3":["brain:Model|tool:“Çalıştır” der|code:Program çalıştırır","phone-call:Temsilci|building:Merkez|file-plus:Kayıt açılır"],
+"8.4":["robot:İstemci|server-2:MCP sunucusu|tool:Araç","device-desktop:İstemci|world-www:Web servisi|code:Metod"],
+"8.5":["code:Senin programın|engine:Agent SDK|tool:Araçların","brand-c-sharp:Uygulama|database-cog:Entity Framework|database:Veri"],
+"8.6":["pencil:Yazan|code:Kod kontrolü|eye-check:Denetleyen","shopping-cart:Talep|checkbox:CHECK kısıtı|user-check:Müdür"],
+"8.7":["alert-triangle:Sinsi talimat|shield-check:Kod kapısı|user-check:İnsan","note:Sipariş notu|printer-off:Belge sayılmaz|user-check:Müdür okur"],
+"9.1":["list:İş listesi|filter:Dört süzgeç|bulb:Fırsat","route:Süreç analizi|receipt-off:Fişsiz harcama yok|building-factory:Doğru modül"],
+"9.2":["file-certificate:Kapsam, fiyat|alert-triangle:Risk|schema:Şema gider","user-star:Dış danışman|schema:Şemayı verirsin|lock:Veri içeride"],
+"9.3":["mood-sad:Dert|rocket:Çözüm|hand-stop:Fren","file-text:Görevler yazılı|user-plus:Vekil belli|beach:İzne çıkar"]
+};
+function flow(spec,cls){const p=spec.split('|');let h='';p.forEach((x,i)=>{const[ic,lb]=x.split(':');h+='<div class="fn" style="animation-delay:'+(i*0.7)+'s"><i class="ti ti-'+ic+'"></i><b>'+lb+'</b></div>';if(i<p.length-1)h+='<div class="fl" style="animation-delay:'+(i*0.7+0.4)+'s"></div>'});return '<div class="'+cls+'" style="display:contents">'+h+'</div>'}
+let L=0,S=0,P=0;
+const $=id=>document.getElementById(id);
+const nav=$('nav');
+D.forEach((lv,i)=>{const b=document.createElement('button');b.className='lv';b.innerHTML='<span class="k">'+(i+1)+'</span><span class="t">'+lv[0]+'</span>';b.onclick=()=>{L=i;S=0;P=0;draw()};nav.appendChild(b)});
+function draw(){
+  const lv=D[L],l=lv[2][S];
+  [...nav.children].forEach((b,i)=>b.classList.toggle('on',i===L));
+  $('where').textContent='SEVİYE '+(L+1)+' · '+lv[0].toUpperCase()+' / DERS '+(S+1)+' / '+lv[2].length;
+  $('cnt').textContent=l[0];
+  $('title').textContent=l[1];
+  $('lsum').textContent=lv[1];
+  const f=F[l[0]],fl=$('flow');
+  $('shd').innerHTML=P===0?'<i class="ti ti-robot" style="color:var(--accent)"></i> CLAUDE DÜNYASINDA':'<i class="ti ti-building-factory" style="color:var(--warm-ink)"></i> SENİN DÜNYANDA';
+  fl.innerHTML=flow(f[P],P===0?'c':'w');
+  fl.classList.remove('swap');void fl.offsetWidth;if(P===1)fl.classList.add('swap');
+  $('stepno').textContent='ADIM '+(P+1)+' / 2';
+  $('pill').textContent=P===0?'KAVRAM':'BENZETME';
+  $('sh').textContent=P===0?'Ne öğrendin?':'Bildiğin dünyada neye benzer?';
+  $('sp').textContent=P===0?l[2]:'Bu kavramı aklında tutmanın yolu:';
+  $('idea').style.display='flex';
+  $('bz').textContent=l[3];
+  const last=L===D.length-1&&S===lv[2].length-1&&P===1;
+  $('fwd').innerHTML=last?'Bitti <i class="ti ti-check"></i>':(P===0?'Benzetmeyi göster':'Sonraki ders')+' <i class="ti ti-arrow-right"></i>';
+  $('dots').innerHTML=lv[2].map((x,i)=>'<button class="dot '+(i===S?'on':i<S?'done':'')+'" data-i="'+i+'">'+x[0]+'</button>').join('');
+  [...$('dots').children].forEach(d=>d.onclick=()=>{S=+d.dataset.i;P=0;draw()});
+}
+function fwd(){if(P===0){P=1}else if(S<D[L][2].length-1){S++;P=0}else if(L<D.length-1){L++;S=0;P=0}draw()}
+function back(){if(P===1){P=0}else if(S>0){S--;P=1}else if(L>0){L--;S=D[L][2].length-1;P=1}draw()}
+$('fwd').onclick=fwd;$('back').onclick=back;
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')fwd();if(e.key==='ArrowLeft')back()});
+$('theme').onclick=()=>{const r=document.documentElement,d=r.dataset.theme==='dark';r.dataset.theme=d?'light':'dark';$('theme').innerHTML='<i class="ti ti-'+(d?'moon':'sun')+'"></i>'};
+if(matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.dataset.theme='dark';$('theme').innerHTML='<i class="ti ti-sun"></i>'}
+draw();
+</script>
+</body>
+</html>
