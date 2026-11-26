@@ -15,7 +15,7 @@ olan geliştiriciler. Program gerçek bir kişisel öğrenme sürecinden derlend
 3. [HATIRLATICILAR.md](HATIRLATICILAR.md): her dersin tek cümlelik özeti. Dersi bitirince ve haftalar sonra tekrar oku.
 4. [seviye-1-7/](seviye-1-7/README.md): Seviye 4–7 alıştırmalarının örnek dosyaları (izin ayarı, skill, hook, durum satırı, mod, alt ajan, takım kuralları, zamanlanmış görev, GitHub Actions).
 5. [kod/](kod/): Seviye 8'in çalışan kodu (C# ve Node).
-6. [gorsel/](gorsel/index.html): görsel tekrar. Dosyayı indirip tarayıcıda aç: 46 dersin her biri adım adım hareketli bir çizimle ve bir benzetmeyle anlatılır. Yanında `kurallar.html` (Claude ile çalışırken 12 kural) ve `tekrar.html` (hızlı tekrar) var. Simgeler ve yazı tipi internetten yüklenir.
+6. **[Görsel tekrar sayfası](https://tufankaskavalci.github.io/claude_ogrenme_public/gorsel/)** (kaynağı [gorsel/](gorsel/)): 46 dersin her biri adım adım hareketli bir çizimle ve bir benzetmeyle anlatılır. Yanında `kurallar.html` (Claude ile çalışırken 12 kural) ve `tekrar.html` (hızlı tekrar) var. Simgeler ve yazı tipi internetten yüklenir.
 
 Kural: bir dersi, sonundaki "geçti ölçütü" sorusunu kendi cümlelerinle yeni bir duruma uygulayabildiğinde bitmiş say.
 Ezberden tekrar etmek geçmek değildir.
