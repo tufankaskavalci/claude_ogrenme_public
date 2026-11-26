@@ -290,3 +290,9 @@ Model kandırılabilir; dolaylı injection verinin içinden gelir ve zincirdeki 
 Teklifin dört bölümü: kapsam (yapmaz listesi dahil), fiyat (emek ve değer; token "şu tavana kadar dahil"), risk (modele değil mimariye güven), ölçüm (önce/sonra). Kişisel veri sorununu mimari küçültür: modele şema gider, sorgu içeride çalışır, kimlik içerideki eşleştirme tablosunda kalır; takma adlı veri yine de kişisel veridir.
 
 **Benzetme:** Dış danışmana canlı veritabanının yedeğini vermezsin, şemayı verirsin; sorguyu o yazar, sen içeride çalıştırırsın. Token, eski tekliflerdeki barındırma gideri satırıdır.
+
+### 9.3 · Demo ve teslim
+
+Demo özellik turu değil, müşterinin dünyasından tek hikâyedir: dert (keşifte öğrendiğini geri anlat), çözüm (tek senaryo, canlı), fren (müşterinin önünde kandırmayı dene, durduğunu göster). Toplu işte model hazırlar, insan karar verir, kod uygular ve kaydeder. Teslim: kod ve README, talimat dosyası, eval seti, işletme notu, onay tablosu, sınırlar ve destek.
+
+**Benzetme:** İyi yönetici izne çıkabilendir: görevler yazılı, vekil belli. "Sen gidersen ne olacak?" sorusunun cevabı: sistem bana bağlı değil, her şey yazılı ve hesap sizin.

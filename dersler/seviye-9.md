@@ -74,6 +74,33 @@ Dört süzgeçten geçen iş iyi bir fırsattır. Birinde takılırsa çözüm b
 
 ## 9.3 Demo ve teslim
 
-Seviye 8'de kurduğun asistanı müşteriye sunar gibi göstermek ve teslim etmek. Alıştırma: bir müşteriye yapılan demo provası.
+**Kavram:** Demo bir özellik turu değildir; müşterinin kendi dünyasından tek bir hikâyedir. Üç perdesi var:
 
-*Yakında.*
+| Perde | Ne gösterirsin | Müşterinin aklındaki soru |
+|---|---|---|
+| 1. Dert | Bugün iş nasıl yapılıyor, ne kaçıyor (teknoloji yok) | "Beni anlıyor mu?" |
+| 2. Çözüm | Tek bir gerçekçi senaryo, baştan sona canlı | "İşimi görür mü?" |
+| 3. Fren | Asistanı müşterinin önünde kandırmayı dene, durduğunu göster | "Başıma iş açar mı?" |
+
+Birinci perdedeki bilgi demoda sorulmaz; keşif görüşmesinde (9.1) öğrenilir ve demoda müşteriye geri anlatılır. Üçüncü perdeyi çoğu kişi atlar, oysa güveni o kurar: Seviye 8'deki asistanda sipariş notuna gizlenmiş "ilk ay ücretsiz" isteği kod kapısından ve şablondan geçemez (8.7), son sözü insan söyler.
+
+Müşteri "bunları benim yerime toplu yap" derse "son karar insanda" kuralı bozulmaz; iş üçe bölünür: **model hazırlar** (liste, eksikler ayrılmış), **insan karar verir** (tek tıkla onay), **kod uygular ve kaydeder** (kim, ne zaman, neyi onayladı).
+
+**Teslim listesi:**
+
+| Kalem | İçinde ne var |
+|---|---|
+| Kod ve README | Nasıl kurulur, nasıl çalıştırılır; hangi parça ne işe yarar |
+| Talimat dosyası | Asistanın kuralları, düz metin; müşteri okuyabilir |
+| Eval seti ve sonuçları | Hangi sorularla denendi, oran neydi; her değişiklikten ve model güncellemesinden sonra yeniden çalışır |
+| İşletme notu | API anahtarı müşterinin hesabında; harcama sınırı, log yeri, anahtar yenileme |
+| Yetki ve onay tablosu | Asistan neyi kendi yapar, neyi insan onaylar |
+| Bilinen sınırlar ve destek | Ne yapmaz; sorun olunca kim, ne kadar sürede bakar; vekil kim |
+
+**Alıştırma:** Müşterin teknik olmayan bir işletme sahibi (ör. mesai dışı siparişleri kaçıran bir mobilya atölyesi). 10 dakikan ve Seviye 8'deki asistan var. Üç perdede ne göstereceğini, müşteriye konuşur gibi, perde başına bir iki cümleyle yaz.
+
+**Geçti ölçütü:** Demo beğenildi ve müşteri sordu: "Sen bir yıl sonra ortada yoksan ya da model değişirse bu sistem ne olacak?" Teslim listesinden hangi kalemler bu soruyu cevaplar? Cevabını müşteriye söyleyeceğin iki üç cümleye indir.
+
+**Benzetme:** İyi yönetici izne çıkabilendir: görev tanımları yazılı, yetkiler devredilebilir, vekili bellidir. Müşteri senden hep orada olmanı değil, bir vekâlet düzeni ister. ERP'deki karşılığı devir teslim tutanağı ve kaynak kod emanetidir.
+
+**Sık hata:** Demoda her özelliği göstermeye çalışmak ve asistanın sınırlarını saklamak. Müşteri "her şeyi yapar" diyene değil, "şunu yapamaz, çünkü yetkisi yok" diyene güvenir. Bir diğeri: teslim listesini iş bitince düşünmek; liste ilk gün teklife yazılır.

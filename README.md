@@ -31,7 +31,7 @@ Ezberden tekrar etmek geçmek değildir.
 | 6 | Claude'un diğer elleri: tarayıcı, computer use, artifact, bulut, Claude ailesi |
 | 7 | Otomasyon: zamanlanmış görev, `/loop`, `claude -p`, GitHub Actions |
 | 8 | Claude ile ürün geliştir: API, talimat ve önbellek, araç kullanımı, MCP sunucusu, Agent SDK, çoklu ajan, eval ve güvenlik |
-| 9 | Danışman: fırsat bulmak, fiyat ve risk, demo (yakında) |
+| 9 | Danışman: fırsat bulmak, fiyat ve risk, demo |
 
 ## Seviye 8 kodu
 
